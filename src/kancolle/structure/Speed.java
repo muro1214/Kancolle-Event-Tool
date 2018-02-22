@@ -1,7 +1,8 @@
 package kancolle.structure;
 
 public enum Speed {
-    FAST("高速"), SLOW("低速");
+    FAST("高速"),
+    SLOW("低速");
 
     private final String string;
 
