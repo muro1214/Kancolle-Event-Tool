@@ -34,7 +34,7 @@ public enum ShipType {
     public static ShipType getType(final String typeName) {
         ShipType[] types = ShipType.values();
         for (ShipType type : types) {
-            if (type.typeName() == typeName) {
+            if (type.typeName().equals(typeName)) {
                 return type;
             }
         }

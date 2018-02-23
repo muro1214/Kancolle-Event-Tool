@@ -3,6 +3,7 @@ package kancolle.gui.panel;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -16,7 +17,6 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import kancolle.fleet.Fleets;
-import kancolle.structure.Kanmusu;
 import kancolle.structure.ShipType;
 
 public class StrikingFleetPanel extends FleetPanel {
@@ -59,13 +59,13 @@ public class StrikingFleetPanel extends FleetPanel {
         panel.add(label_1);
 
         comboBox_Type_1 = new JComboBox<String>();
-        comboBox_Type_1.setBounds(26, 21, 127, 19);
+        comboBox_Type_1.setBounds(26, 21, 100, 19);
         comboBox_Type_1.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
         comboBox_Type_1.addActionListener(this);
         panel.add(comboBox_Type_1);
 
         comboBox_Name_1 = new JComboBox<String>();
-        comboBox_Name_1.setBounds(165, 21, 127, 19);
+        comboBox_Name_1.setBounds(138, 21, 154, 19);
         comboBox_Name_1.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
         panel.add(comboBox_Name_1);
 
@@ -74,13 +74,13 @@ public class StrikingFleetPanel extends FleetPanel {
         panel.add(label_2);
 
         comboBox_Type_2 = new JComboBox<String>();
-        comboBox_Type_2.setBounds(26, 52, 127, 19);
+        comboBox_Type_2.setBounds(26, 52, 100, 19);
         comboBox_Type_2.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
         comboBox_Type_2.addActionListener(this);
         panel.add(comboBox_Type_2);
 
         comboBox_Name_2 = new JComboBox<String>();
-        comboBox_Name_2.setBounds(165, 52, 127, 19);
+        comboBox_Name_2.setBounds(138, 52, 154, 19);
         comboBox_Name_2.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
         panel.add(comboBox_Name_2);
 
@@ -89,13 +89,13 @@ public class StrikingFleetPanel extends FleetPanel {
         panel.add(label_3);
 
         comboBox_Type_3 = new JComboBox<String>();
-        comboBox_Type_3.setBounds(26, 83, 127, 19);
+        comboBox_Type_3.setBounds(26, 83, 100, 19);
         comboBox_Type_3.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
         comboBox_Type_3.addActionListener(this);
         panel.add(comboBox_Type_3);
 
         comboBox_Name_3 = new JComboBox<String>();
-        comboBox_Name_3.setBounds(165, 83, 127, 19);
+        comboBox_Name_3.setBounds(138, 83, 154, 19);
         comboBox_Name_3.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
         panel.add(comboBox_Name_3);
 
@@ -104,13 +104,13 @@ public class StrikingFleetPanel extends FleetPanel {
         panel.add(label_4);
 
         comboBox_Type_4 = new JComboBox<String>();
-        comboBox_Type_4.setBounds(26, 114, 127, 19);
+        comboBox_Type_4.setBounds(26, 114, 100, 19);
         comboBox_Type_4.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
         comboBox_Type_4.addActionListener(this);
         panel.add(comboBox_Type_4);
 
         comboBox_Name_4 = new JComboBox<String>();
-        comboBox_Name_4.setBounds(165, 114, 127, 19);
+        comboBox_Name_4.setBounds(138, 114, 154, 19);
         comboBox_Name_4.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
         panel.add(comboBox_Name_4);
 
@@ -119,13 +119,13 @@ public class StrikingFleetPanel extends FleetPanel {
         panel.add(label_5);
 
         comboBox_Type_5 = new JComboBox<String>();
-        comboBox_Type_5.setBounds(26, 145, 127, 19);
+        comboBox_Type_5.setBounds(26, 145, 100, 19);
         comboBox_Type_5.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
         comboBox_Type_5.addActionListener(this);
         panel.add(comboBox_Type_5);
 
         comboBox_Name_5 = new JComboBox<String>();
-        comboBox_Name_5.setBounds(165, 145, 127, 19);
+        comboBox_Name_5.setBounds(138, 145, 154, 19);
         comboBox_Name_5.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
         panel.add(comboBox_Name_5);
 
@@ -134,13 +134,13 @@ public class StrikingFleetPanel extends FleetPanel {
         panel.add(label_6);
 
         comboBox_Type_6 = new JComboBox<String>();
-        comboBox_Type_6.setBounds(26, 176, 127, 19);
+        comboBox_Type_6.setBounds(26, 176, 100, 19);
         comboBox_Type_6.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
         comboBox_Type_6.addActionListener(this);
         panel.add(comboBox_Type_6);
 
         comboBox_Name_6 = new JComboBox<String>();
-        comboBox_Name_6.setBounds(165, 176, 127, 19);
+        comboBox_Name_6.setBounds(138, 176, 154, 19);
         comboBox_Name_6.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
         panel.add(comboBox_Name_6);
 
@@ -149,13 +149,13 @@ public class StrikingFleetPanel extends FleetPanel {
         panel.add(label_7);
 
         comboBox_Type_7 = new JComboBox<String>();
-        comboBox_Type_7.setBounds(26, 207, 127, 19);
+        comboBox_Type_7.setBounds(26, 207, 100, 19);
         comboBox_Type_7.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
         comboBox_Type_7.addActionListener(this);
         panel.add(comboBox_Type_7);
 
         comboBox_Name_7 = new JComboBox<String>();
-        comboBox_Name_7.setBounds(165, 207, 127, 19);
+        comboBox_Name_7.setBounds(138, 207, 154, 19);
         comboBox_Name_7.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
         panel.add(comboBox_Name_7);
 
@@ -202,11 +202,8 @@ public class StrikingFleetPanel extends FleetPanel {
             return;
         }
 
-        //TODO: レベルフィルターの実装
-        List<String> kanmusuList = Fleets.getKanmusuList().stream()
-                .filter(Kanmusu -> Kanmusu.shipType() == shipType)
-                .map(Kanmusu::name)
-                .collect(Collectors.toList());
+        List<String> kanmusuList = Fleets.filterKanmusuList(shipType, EventPanel.isFastOnly(),
+                EventPanel.getLevelFilter(), EventPanel.getTag());
 
         int fleetNo = 0;
         if (comboBox == comboBox_Type_1) {
@@ -232,15 +229,26 @@ public class StrikingFleetPanel extends FleetPanel {
     public void setComboBoxType(final List<ShipType> shipTypes) {
         List<String> shipTypeStrs = shipTypes.stream()
                 .map(ShipType::typeName).collect(Collectors.toList());
-        shipTypeStrs.add(0, "艦娘");
+        shipTypeStrs.add(0, "艦種");
 
-        comboBox_Name_1.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Name_2.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Name_3.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Name_4.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Name_5.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Name_6.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Name_7.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
+        comboBox_Type_1.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
+        comboBox_Type_2.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
+        comboBox_Type_3.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
+        comboBox_Type_4.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
+        comboBox_Type_5.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
+        comboBox_Type_6.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
+        comboBox_Type_7.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
+    }
+
+    @Override
+    public List<String> getFleetKanmusus(){
+        return Arrays.asList(comboBox_Name_1.getSelectedItem().toString(),
+                comboBox_Name_2.getSelectedItem().toString(),
+                comboBox_Name_3.getSelectedItem().toString(),
+                comboBox_Name_4.getSelectedItem().toString(),
+                comboBox_Name_5.getSelectedItem().toString(),
+                comboBox_Name_6.getSelectedItem().toString(),
+                comboBox_Name_7.getSelectedItem().toString());
     }
 
     @Override

@@ -3,6 +3,8 @@ package kancolle.structure;
 import java.util.Arrays;
 import java.util.List;
 
+import kancolle.fleet.Fleets;
+
 public class Kanmusu {
     private int id;
     private String name;
@@ -23,11 +25,14 @@ public class Kanmusu {
 
         id = Integer.parseInt(tmp.get(1));
         name = tmp.get(8);
-        initialName = tmp.get(10);
+        initialName = Fleets.getInitialName(tmp.get(10));
         shipType = ShipType.getType(tmp.get(9));
         level = Integer.parseInt(tmp.get(22));
         speed = Speed.getType(tmp.get(25));
-        tag = tmp.get(55);
+//        tag = tmp.get(55);
+        tag = "";
+
+        System.out.println(initialName);
     }
 
     public int id() {
@@ -66,8 +71,12 @@ public class Kanmusu {
         return tag;
     }
 
+    public void setTag(String tag){
+        this.tag = tag;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s(Lv.%d)", name(), level());
+        return String.format("%s(Lv.%d, ID#%d)", name(), level(), id());
     }
 }

@@ -20,7 +20,7 @@ public enum FleetType {
     public FleetType getType(final String name) {
         FleetType[] types = FleetType.values();
         for (FleetType type : types) {
-            if (type.typeName() == typeName) {
+            if (type.typeName().equals(name)) {
                 return type;
             }
         }

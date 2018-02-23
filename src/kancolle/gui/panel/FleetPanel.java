@@ -9,11 +9,13 @@ import javax.swing.JPanel;
 
 import kancolle.structure.ShipType;
 
-public abstract class FleetPanel implements ActionListener {
+public abstract class FleetPanel extends JPanel implements ActionListener {
 
     public abstract JPanel addPanel(final String title, final Point point);
 
     public abstract void setComboBoxType(final List<ShipType> shipTypes);
+
+    public abstract List<String> getFleetKanmusus();
 
     protected abstract void setComboBoxNameList(final int fleetNo, final List<String> kanmusuList);
 

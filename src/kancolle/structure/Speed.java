@@ -17,7 +17,7 @@ public enum Speed {
     public static Speed getType(final String string) {
         Speed[] speeds = Speed.values();
         for (Speed speed : speeds) {
-            if (speed.string() == string) {
+            if (speed.string().equals(string)) {
                 return speed;
             }
         }
