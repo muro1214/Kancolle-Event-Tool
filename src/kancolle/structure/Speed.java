@@ -11,7 +11,7 @@ public enum Speed {
     }
 
     public String string() {
-        return string;
+        return this.string;
     }
 
     public static Speed getType(final String string) {

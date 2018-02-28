@@ -36,6 +36,10 @@ import kancolle.structure.ShipType;
 
 public class EventPanel extends JPanel implements ActionListener {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -5204755549072287528L;
     private JPanel panel;
     private JPanel panel_2;
     private JPanel panel_3;
@@ -64,230 +68,231 @@ public class EventPanel extends JPanel implements ActionListener {
     //memo  panel.remove();
 
     public JPanel addPanel() {
-        panel = new JPanel();
-        panel.setLayout(null);
+        this.panel = new JPanel();
+        this.panel.setLayout(null);
 
-        panel_2 = new JPanel();
-        panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "艦隊", TitledBorder.LEADING,
+        this.panel_2 = new JPanel();
+        this.panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "艦隊", TitledBorder.LEADING,
                 TitledBorder.TOP, null, new Color(0, 0, 0)));
-        panel_2.setBounds(12, 10, 423, 40);
-        panel.add(panel_2);
-        panel_2.setLayout(null);
+        this.panel_2.setBounds(12, 10, 423, 40);
+        this.panel.add(this.panel_2);
+        this.panel_2.setLayout(null);
 
-        radioButton = new JRadioButton(FleetType.NORMAL.typeName());
-        buttonGroup.add(radioButton);
-        radioButton.setSelected(true);
-        radioButton.setBounds(8, 13, 74, 21);
-        radioButton.addActionListener(this);
-        panel_2.add(radioButton);
+        this.radioButton = new JRadioButton(FleetType.NORMAL.typeName());
+        this.buttonGroup.add(this.radioButton);
+        this.radioButton.setSelected(true);
+        this.radioButton.setBounds(8, 13, 74, 21);
+        this.radioButton.addActionListener(this);
+        this.panel_2.add(this.radioButton);
 
-        radioButton_1 = new JRadioButton(FleetType.STRIKING_FORCE.typeName());
-        buttonGroup.add(radioButton_1);
-        radioButton_1.setBounds(86, 13, 74, 21);
-        radioButton_1.addActionListener(this);
-        panel_2.add(radioButton_1);
+        this.radioButton_1 = new JRadioButton(FleetType.STRIKING_FORCE.typeName());
+        this.buttonGroup.add(this.radioButton_1);
+        this.radioButton_1.setBounds(86, 13, 74, 21);
+        this.radioButton_1.addActionListener(this);
+        this.panel_2.add(this.radioButton_1);
 
-        radioButton_2 = new JRadioButton(FleetType.CARRIER_TASK_FORCE.typeName());
-        buttonGroup.add(radioButton_2);
-        radioButton_2.setBounds(164, 13, 74, 21);
-        radioButton_2.addActionListener(this);
-        panel_2.add(radioButton_2);
+        this.radioButton_2 = new JRadioButton(FleetType.CARRIER_TASK_FORCE.typeName());
+        this.buttonGroup.add(this.radioButton_2);
+        this.radioButton_2.setBounds(164, 13, 74, 21);
+        this.radioButton_2.addActionListener(this);
+        this.panel_2.add(this.radioButton_2);
 
-        radioButton_3 = new JRadioButton(FleetType.SURFACE_TASK_FORCE.typeName());
-        buttonGroup.add(radioButton_3);
-        radioButton_3.setBounds(242, 13, 74, 21);
-        radioButton_3.addActionListener(this);
-        panel_2.add(radioButton_3);
+        this.radioButton_3 = new JRadioButton(FleetType.SURFACE_TASK_FORCE.typeName());
+        this.buttonGroup.add(this.radioButton_3);
+        this.radioButton_3.setBounds(242, 13, 74, 21);
+        this.radioButton_3.addActionListener(this);
+        this.panel_2.add(this.radioButton_3);
 
-        radioButton_4 = new JRadioButton(FleetType.TRANSPORT_ESCORT.typeName());
-        buttonGroup.add(radioButton_4);
-        radioButton_4.setBounds(320, 13, 74, 21);
-        radioButton_4.addActionListener(this);
-        panel_2.add(radioButton_4);
+        this.radioButton_4 = new JRadioButton(FleetType.TRANSPORT_ESCORT.typeName());
+        this.buttonGroup.add(this.radioButton_4);
+        this.radioButton_4.setBounds(320, 13, 74, 21);
+        this.radioButton_4.addActionListener(this);
+        this.panel_2.add(this.radioButton_4);
 
         NormalFleetPanel normalFleetPanel = new NormalFleetPanel();
-        panel_fleet1 = normalFleetPanel.addPanel("第一部隊", new Point(12, 60));
+        this.panel_fleet1 = normalFleetPanel.addPanel("第一部隊", new Point(12, 60));
         normalFleetPanel.setComboBoxType(Arrays.asList(ShipType.values()));
-        panel.add(panel_fleet1);
+        this.panel.add(this.panel_fleet1);
 
-        panel_3 = new JPanel();
-        panel_3.setBorder(new TitledBorder(null, "札情報", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        panel_3.setBounds(447, 10, 171, 47);
-        panel.add(panel_3);
-        panel_3.setLayout(null);
+        this.panel_3 = new JPanel();
+        this.panel_3.setBorder(new TitledBorder(null, "札情報", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        this.panel_3.setBounds(447, 10, 171, 47);
+        this.panel.add(this.panel_3);
+        this.panel_3.setLayout(null);
 
         textField_tag = new JTextField();
         textField_tag.setBounds(12, 18, 147, 19);
-        panel_3.add(textField_tag);
+        this.panel_3.add(textField_tag);
         textField_tag.setColumns(10);
 
-        panel_4 = new JPanel();
-        panel_4.setBounds(644, 10, 142, 82);
-        panel.add(panel_4);
-        panel_4.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "フィルター",
+        this.panel_4 = new JPanel();
+        this.panel_4.setBounds(644, 10, 142, 82);
+        this.panel.add(this.panel_4);
+        this.panel_4.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "フィルター",
                 TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-        panel_4.setLayout(null);
+        this.panel_4.setLayout(null);
 
-        label_1 = new JLabel("レベル");
-        label_1.setBounds(12, 26, 36, 13);
-        panel_4.add(label_1);
+        this.label_1 = new JLabel("レベル");
+        this.label_1.setBounds(12, 26, 36, 13);
+        this.panel_4.add(this.label_1);
 
         textField_levelFilter = new JTextField("1");
         textField_levelFilter.setHorizontalAlignment(SwingConstants.CENTER);
         textField_levelFilter.setBounds(44, 23, 36, 19);
-        panel_4.add(textField_levelFilter);
+        this.panel_4.add(textField_levelFilter);
         textField_levelFilter.setColumns(10);
 
-        label_2 = new JLabel("以上のみ");
-        label_2.setBounds(84, 26, 50, 13);
-        panel_4.add(label_2);
+        this.label_2 = new JLabel("以上のみ");
+        this.label_2.setBounds(84, 26, 50, 13);
+        this.panel_4.add(this.label_2);
 
         checkBox_fastOnly = new JCheckBox("高速統一");
         checkBox_fastOnly.setBounds(8, 54, 103, 21);
-        panel_4.add(checkBox_fastOnly);
+        this.panel_4.add(checkBox_fastOnly);
 
-        button = new JButton("適用");
-        button.setBounds(675, 108, 91, 21);
-        button.addActionListener(this);
-        panel.add(button);
+        this.button = new JButton("適用");
+        this.button.setBounds(675, 108, 91, 21);
+        this.button.addActionListener(this);
+        this.panel.add(this.button);
 
-        return panel;
+        return this.panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object object = e.getSource();
 
-        if (object == radioButton && radioButton.isSelected()) {
+        if (object == this.radioButton && this.radioButton.isSelected()) {
             removeFleetPanels();
 
-            normalFleetPanel1 = new NormalFleetPanel();
-            panel_fleet1 = normalFleetPanel1.addPanel("第一部隊", new Point(12, 60));
-            normalFleetPanel1.setComboBoxType(Arrays.asList(ShipType.values()));
-            panel.add(panel_fleet1);
+            this.normalFleetPanel1 = new NormalFleetPanel();
+            this.panel_fleet1 = this.normalFleetPanel1.addPanel("第一部隊", new Point(12, 60));
+            this.normalFleetPanel1.setComboBoxType(Arrays.asList(ShipType.values()));
+            this.panel.add(this.panel_fleet1);
 
-            panel.revalidate();
-            panel.repaint();
+            this.panel.revalidate();
+            this.panel.repaint();
 
-            isBeforeCombinedFleet = false;
+            this.isBeforeCombinedFleet = false;
             Logger.getGlobal().info("艦隊情報を変更 -> 通常艦隊");
-        } else if (object == radioButton_1 && radioButton_1.isSelected()) {
+        } else if (object == this.radioButton_1 && this.radioButton_1.isSelected()) {
             removeFleetPanels();
 
-            strikingFleetPanel = new StrikingFleetPanel();
-            panel_fleet1 = strikingFleetPanel.addPanel("第一部隊", new Point(12, 60));
-            strikingFleetPanel.setComboBoxType(Arrays.asList(ShipType.values()));
-            panel.add(panel_fleet1);
+            this.strikingFleetPanel = new StrikingFleetPanel();
+            this.panel_fleet1 = this.strikingFleetPanel.addPanel("第一部隊", new Point(12, 60));
+            this.strikingFleetPanel.setComboBoxType(Arrays.asList(ShipType.values()));
+            this.panel.add(this.panel_fleet1);
 
-            panel.revalidate();
-            panel.repaint();
+            this.panel.revalidate();
+            this.panel.repaint();
 
-            isBeforeCombinedFleet = false;
+            this.isBeforeCombinedFleet = false;
             Logger.getGlobal().info("艦隊情報を変更 -> 遊撃艦隊");
-        } else if ((object == radioButton_2 || object == radioButton_3 || object == radioButton_4) &&
-                (radioButton_2.isSelected() || radioButton_3.isSelected() || radioButton_4.isSelected())) {
-            if (isBeforeCombinedFleet) {
+        } else if ((object == this.radioButton_2 || object == this.radioButton_3 || object == this.radioButton_4) &&
+                (this.radioButton_2.isSelected() || this.radioButton_3.isSelected()
+                        || this.radioButton_4.isSelected())) {
+            if (this.isBeforeCombinedFleet) {
                 Logger.getGlobal().info("艦隊情報を変更 -> " + getCurrentFleetType().typeName());
                 return;
             }
 
             removeFleetPanels();
 
-            normalFleetPanel1 = new NormalFleetPanel();
-            panel_fleet1 = normalFleetPanel1.addPanel("第一部隊", new Point(12, 60));
-            normalFleetPanel1.setComboBoxType(Arrays.asList(ShipType.values()));
-            panel.add(panel_fleet1);
+            this.normalFleetPanel1 = new NormalFleetPanel();
+            this.panel_fleet1 = this.normalFleetPanel1.addPanel("第一部隊", new Point(12, 60));
+            this.normalFleetPanel1.setComboBoxType(Arrays.asList(ShipType.values()));
+            this.panel.add(this.panel_fleet1);
 
-            normalFleetPanel2 = new NormalFleetPanel();
-            panel_fleet2 = normalFleetPanel2.addPanel("第二部隊", new Point(328, 60));
-            normalFleetPanel2.setComboBoxType(Arrays.asList(ShipType.values()));
-            panel.add(panel_fleet2);
+            this.normalFleetPanel2 = new NormalFleetPanel();
+            this.panel_fleet2 = this.normalFleetPanel2.addPanel("第二部隊", new Point(328, 60));
+            this.normalFleetPanel2.setComboBoxType(Arrays.asList(ShipType.values()));
+            this.panel.add(this.panel_fleet2);
 
-            panel.revalidate();
-            panel.repaint();
+            this.panel.revalidate();
+            this.panel.repaint();
 
-            isBeforeCombinedFleet = true;
+            this.isBeforeCombinedFleet = true;
             Logger.getGlobal().info("艦隊情報を変更 -> " + getCurrentFleetType().typeName());
-        }else if(object == button){
+        } else if (object == this.button) {
             setKanmusuTag();
             saveXmlFile();
         }
     }
 
     private void removeFleetPanels() {
-        if (!Objects.isNull(panel_fleet1)) {
-            panel.remove(panel_fleet1);
-            panel_fleet1 = null;
+        if (!Objects.isNull(this.panel_fleet1)) {
+            this.panel.remove(this.panel_fleet1);
+            this.panel_fleet1 = null;
         }
-        if (!Objects.isNull(panel_fleet2)) {
-            panel.remove(panel_fleet2);
-            panel_fleet2 = null;
+        if (!Objects.isNull(this.panel_fleet2)) {
+            this.panel.remove(this.panel_fleet2);
+            this.panel_fleet2 = null;
         }
     }
 
-    public static boolean isFastOnly(){
+    public static boolean isFastOnly() {
         return checkBox_fastOnly.isSelected();
     }
 
-    public static int getLevelFilter(){
+    public static int getLevelFilter() {
         String text = textField_levelFilter.getText();
-        try{
+        try {
             int tmp = Integer.parseInt(text);
-            if(tmp < 1 || tmp > 165){
+            if (tmp < 1 || tmp > 165) {
                 Logger.getGlobal().warning("wrong level filter");
                 return 1;
-            }else{
-                return tmp;
             }
-        }catch(NumberFormatException e){
+            return tmp;
+        } catch (NumberFormatException e) {
             Logger.getGlobal().warning("wrong level filter");
+            Logger.getGlobal().warning(e.toString());
             return 1;
         }
     }
 
-    public static String getTag(){
+    public static String getTag() {
         return textField_tag.getText();
     }
 
-    private FleetType getCurrentFleetType(){
-        if(radioButton.isSelected()){
+    private FleetType getCurrentFleetType() {
+        if (this.radioButton.isSelected()) {
             return FleetType.NORMAL;
-        }else if(radioButton_1.isSelected()){
+        } else if (this.radioButton_1.isSelected()) {
             return FleetType.STRIKING_FORCE;
-        }else if(radioButton_2.isSelected()){
+        } else if (this.radioButton_2.isSelected()) {
             return FleetType.CARRIER_TASK_FORCE;
-        }else if(radioButton_3.isSelected()){
+        } else if (this.radioButton_3.isSelected()) {
             return FleetType.SURFACE_TASK_FORCE;
-        }else{
+        } else {
             return FleetType.TRANSPORT_ESCORT;
         }
     }
 
-    private List<String> getAllFleetKanmusus(){
-        List<String> kanmusus = new ArrayList<String>();
+    private List<String> getAllFleetKanmusus() {
+        List<String> kanmusus = new ArrayList<>();
 
-        if(radioButton.isSelected()){
-            kanmusus.addAll(normalFleetPanel1.getFleetKanmusus());
-        }else if(radioButton_1.isSelected()){
-            kanmusus.addAll(strikingFleetPanel.getFleetKanmusus());
-        }else{
-            kanmusus.addAll(normalFleetPanel1.getFleetKanmusus());
-            kanmusus.addAll(normalFleetPanel2.getFleetKanmusus());
+        if (this.radioButton.isSelected()) {
+            kanmusus.addAll(this.normalFleetPanel1.getFleetKanmusus());
+        } else if (this.radioButton_1.isSelected()) {
+            kanmusus.addAll(this.strikingFleetPanel.getFleetKanmusus());
+        } else {
+            kanmusus.addAll(this.normalFleetPanel1.getFleetKanmusus());
+            kanmusus.addAll(this.normalFleetPanel2.getFleetKanmusus());
         }
 
         return kanmusus;
     }
 
-    private int getKanmusuId(String kanmusu){
+    private static int getKanmusuId(String kanmusu) {
         return Integer.parseInt(kanmusu.split(", ")[1].replaceAll("ID#|\\)", ""));
     }
 
-    private void setKanmusuTag(){
+    private void setKanmusuTag() {
         List<String> kanmusus = getAllFleetKanmusus();
         String tag = getTag();
 
-        for(String kanmusu : kanmusus){
-            if(kanmusu.equals("艦娘")){
+        for (String kanmusu : kanmusus) {
+            if (kanmusu.equals("艦娘")) {
                 continue;
             }
             int id = getKanmusuId(kanmusu);
@@ -295,7 +300,7 @@ public class EventPanel extends JPanel implements ActionListener {
         }
     }
 
-    private void saveXmlFile(){
+    private void saveXmlFile() {
         EventBuilder eventBuilder = new EventBuilder();
 
         String tabName = MainLoader.getCurrentTabName();
@@ -303,8 +308,8 @@ public class EventPanel extends JPanel implements ActionListener {
                 getCurrentFleetType(), checkBox_fastOnly.isSelected());
 
         List<String> kanmusus = getAllFleetKanmusus();
-        for(int i = 0; i < kanmusus.size(); i++){
-            if(kanmusus.get(i).equals("艦娘")){
+        for (int i = 0; i < kanmusus.size(); i++) {
+            if (kanmusus.get(i).equals("艦娘")) {
                 continue;
             }
             Kanmusu kanmusu = Fleets.getKanmusuFromId(getKanmusuId(kanmusus.get(i)));
@@ -314,9 +319,9 @@ public class EventPanel extends JPanel implements ActionListener {
         eventArea.appendChild(eventBuilder.buildFilterElement(textField_levelFilter.getText()));
 
         Path path = Paths.get(String.format("xml\\%s.xml", tabName));
-        try{
+        try {
             Files.deleteIfExists(path);
-        }catch(IOException e){
+        } catch (IOException e) {
             Logger.getGlobal().warning(e.toString());
         }
 

@@ -14,10 +14,10 @@ public enum FleetType {
     }
 
     public String typeName() {
-        return typeName;
+        return this.typeName;
     }
 
-    public FleetType getType(final String name) {
+    public static FleetType getType(final String name) {
         FleetType[] types = FleetType.values();
         for (FleetType type : types) {
             if (type.typeName().equals(name)) {

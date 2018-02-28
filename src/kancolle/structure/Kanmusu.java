@@ -23,58 +23,58 @@ public class Kanmusu {
             return;
         }
 
-        id = Integer.parseInt(tmp.get(1));
-        name = tmp.get(8);
-        initialName = Fleets.getInitialName(tmp.get(10));
-        shipType = ShipType.getType(tmp.get(9));
-        level = Integer.parseInt(tmp.get(22));
-        speed = Speed.getType(tmp.get(25));
-//        tag = tmp.get(55);
-        tag = "";
+        this.id = Integer.parseInt(tmp.get(1));
+        this.name = tmp.get(8);
+        this.initialName = Fleets.getInitialName(tmp.get(10));
+        this.shipType = ShipType.getType(tmp.get(9));
+        this.level = Integer.parseInt(tmp.get(22));
+        this.speed = Speed.getType(tmp.get(25));
+        //        tag = tmp.get(55);
+        this.tag = "";
     }
 
     public int id() {
-        return id;
+        return this.id;
     }
 
     public String name() {
-        return name;
+        return this.name;
     }
 
     public String initialName() {
-        return initialName;
+        return this.initialName;
     }
 
     public ShipType shipType() {
-        return shipType;
+        return this.shipType;
     }
 
     public String shipTypeString() {
-        return shipType.typeName();
+        return this.shipType.typeName();
     }
 
     public int level() {
-        return level;
+        return this.level;
     }
 
     public Speed speed() {
-        return speed;
+        return this.speed;
     }
 
     public String speedString() {
-        return speed.string();
+        return this.speed.string();
     }
 
     public String tag() {
-        return tag;
+        return this.tag;
     }
 
-    public void setTag(String tag){
+    public void setTag(String tag) {
         this.tag = tag;
     }
 
     @Override
     public String toString() {
-        return String.format("%s(Lv.%d, ID#%d)", name(), level(), id());
+        return String.format("%s(Lv.%d, ID#%d)", this.name, this.level, this.id);
     }
 }

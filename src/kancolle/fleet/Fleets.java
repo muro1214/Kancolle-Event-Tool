@@ -2,7 +2,6 @@ package kancolle.fleet;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -24,7 +23,7 @@ public class Fleets {
     private static List<Kanmusu> kanmusuList = new ArrayList<>();
     private static final Properties PROPERTIES;
 
-    static{
+    static {
         PROPERTIES = loadPropertiesFile();
     }
 
@@ -44,7 +43,7 @@ public class Fleets {
         // ヘッダ情報はいらないので除外する
         csvData.remove(0);
 
-        List<Kanmusu> kanmusus = new ArrayList<Kanmusu>();
+        List<Kanmusu> kanmusus = new ArrayList<>();
         csvData.forEach(line -> {
             kanmusus.add(new Kanmusu(line));
         });
@@ -54,16 +53,15 @@ public class Fleets {
         kanmusuList.addAll(kanmusus);
     }
 
-    private static Properties loadPropertiesFile(){
+    private static Properties loadPropertiesFile() {
         Properties properties = new Properties();
 
-        try{
-            InputStream inputStream = new FileInputStream(System.getProperty("user.dir") + "\\Kanmusu-Naming.properties");
-            InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+        try (InputStreamReader reader = new InputStreamReader(new FileInputStream(System.getProperty("user.dir") +
+                "\\Kanmusu-Naming.properties"), StandardCharsets.UTF_8)) {
             properties.load(reader);
 
             return properties;
-        }catch(IOException e){
+        } catch (IOException e) {
             Logger.getGlobal().severe(e.toString());
             return null;
         }
@@ -74,53 +72,53 @@ public class Fleets {
     }
 
     public static List<String> filterKanmusuList(final ShipType shipType, final boolean isFastOnly,
-            final int levelFilter, final String tag){
+            final int levelFilter, final String tag) {
 
         Stream<Kanmusu> stream = Fleets.getKanmusuList().stream()
                 .filter(kanmusu -> kanmusu.shipType() == shipType)
                 .filter(kanmusu -> kanmusu.level() >= levelFilter)
                 .sorted(Comparator.comparing(Kanmusu::initialName));
 
-        if(isFastOnly){
+        if (isFastOnly) {
             stream = stream.filter(kanmusu -> kanmusu.speed() == Speed.FAST);
         }
-        if(!tag.equals("")){
+        if (!tag.equals("")) {
             stream = stream.filter(kanmusu -> kanmusu.tag().equals(tag) || kanmusu.tag().equals(""));
         }
 
         return stream.map(Kanmusu::toString).collect(Collectors.toList());
     }
 
-    public static String getInitialName(String key){
+    public static String getInitialName(String key) {
         String initial = PROPERTIES.getProperty(key);
 
         return Objects.isNull(initial) ? key : initial;
     }
 
-    public static Kanmusu getKanmusuFromId(final int id){
+    public static Kanmusu getKanmusuFromId(final int id) {
         return kanmusuList.stream().filter(it -> it.id() == id)
                 .findFirst().get();
     }
 
-    public static void setTag(final int id, final String tag){
+    public static void setTag(final int id, final String tag) {
         Kanmusu kanmusu = getKanmusuFromId(id);
 
         kanmusu.setTag(tag);
         Logger.getGlobal().info(kanmusu + " sets tag : " + tag);
     }
 
-    public static int getCount(final ShipType shipType){
+    public static int getCount(final ShipType shipType) {
         return (int) kanmusuList.stream().filter(kanmusu -> kanmusu.shipType() == shipType).count();
     }
 
-    public static int getAverageLevel(final ShipType shipType){
+    public static int getAverageLevel(final ShipType shipType) {
         double average = kanmusuList.stream().filter(kanmusu -> kanmusu.shipType() == shipType)
                 .mapToInt(Kanmusu::level).average().getAsDouble();
 
         return (int) Math.round(average);
     }
 
-    public static int getMaxLevel(final ShipType shipType){
+    public static int getMaxLevel(final ShipType shipType) {
         return kanmusuList.stream().filter(kanmusu -> kanmusu.shipType() == shipType)
                 .mapToInt(Kanmusu::level).max().getAsInt();
     }

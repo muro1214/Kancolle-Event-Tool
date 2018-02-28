@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
@@ -27,10 +28,14 @@ import javax.swing.event.ChangeListener;
 import kancolle.gui.panel.EventPanel;
 import kancolle.gui.panel.SettingPanel;
 
-public class MainLoader extends JFrame implements ActionListener{
+public class MainLoader extends JFrame implements ActionListener {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3939230639977237978L;
     private JPanel contentPane;
-    private JTabbedPane tabbedPane;
+    JTabbedPane tabbedPane;
     private JMenuBar menuBar;
     private JMenu mnFile;
     private JMenu mnHelp;
@@ -44,9 +49,8 @@ public class MainLoader extends JFrame implements ActionListener{
     private JButton button_deleteTab;
     private JButton button_renameTab;
 
-    private static MainLoader frame;
-    private static String currentTabName;
-    private static int currentTabNo;
+    static String currentTabName;
+    static int currentTabNo;
 
     public static void main(String[] args) {
         initializeLogger();
@@ -54,7 +58,7 @@ public class MainLoader extends JFrame implements ActionListener{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    frame = new MainLoader();
+                    MainLoader frame = new MainLoader();
                     frame.setResizable(false);
                     frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
@@ -65,7 +69,7 @@ public class MainLoader extends JFrame implements ActionListener{
         });
     }
 
-    public MainLoader(){
+    public MainLoader() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 835, 445);
 
@@ -73,138 +77,140 @@ public class MainLoader extends JFrame implements ActionListener{
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             SwingUtilities.updateComponentTreeUI(this);
         } catch (Exception e) {
+            Logger.getGlobal().info(e.toString());
         }
 
-        menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
+        this.menuBar = new JMenuBar();
+        setJMenuBar(this.menuBar);
 
-        mnFile = new JMenu("File");
-        menuBar.add(mnFile);
+        this.mnFile = new JMenu("File");
+        this.menuBar.add(this.mnFile);
 
-        mntmOpen = new JMenuItem("Open");
-        mnFile.add(mntmOpen);
+        this.mntmOpen = new JMenuItem("Open");
+        this.mnFile.add(this.mntmOpen);
 
-        mntmSave = new JMenuItem("Save");
-        mnFile.add(mntmSave);
+        this.mntmSave = new JMenuItem("Save");
+        this.mnFile.add(this.mntmSave);
 
-        mntmSaveAs = new JMenuItem("Save As");
-        mnFile.add(mntmSaveAs);
+        this.mntmSaveAs = new JMenuItem("Save As");
+        this.mnFile.add(this.mntmSaveAs);
 
-        separator = new JSeparator();
-        mnFile.add(separator);
+        this.separator = new JSeparator();
+        this.mnFile.add(this.separator);
 
-        mntmExit = new JMenuItem("Exit");
-        mnFile.add(mntmExit);
+        this.mntmExit = new JMenuItem("Exit");
+        this.mnFile.add(this.mntmExit);
 
-        mnHelp = new JMenu("Help");
-        menuBar.add(mnHelp);
+        this.mnHelp = new JMenu("Help");
+        this.menuBar.add(this.mnHelp);
 
-        mntmAbout = new JMenuItem("About");
-        mnHelp.add(mntmAbout);
+        this.mntmAbout = new JMenuItem("About");
+        this.mnHelp.add(this.mntmAbout);
 
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+        this.contentPane = new JPanel();
+        this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(this.contentPane);
+        this.contentPane.setLayout(null);
 
-        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.setBounds(12, 41, 798, 336);
-        tabbedPane.addChangeListener(new ChangeListener() {
+        this.tabbedPane = new JTabbedPane(SwingConstants.TOP);
+        this.tabbedPane.setBounds(12, 41, 798, 336);
+        this.tabbedPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                currentTabNo = tabbedPane.getSelectedIndex();
-                currentTabName = tabbedPane.getTitleAt(tabbedPane.getSelectedIndex());
+                MainLoader.currentTabNo = MainLoader.this.tabbedPane.getSelectedIndex();
+                MainLoader.currentTabName = MainLoader.this.tabbedPane.getTitleAt(MainLoader.this.tabbedPane.getSelectedIndex());
             }
         });
 
         SettingPanel settingPanel = new SettingPanel();
-        tabbedPane.addTab("設定画面", settingPanel.addPanel());
+        this.tabbedPane.addTab("設定画面", settingPanel.addPanel());
 
-        contentPane.add(tabbedPane);
+        this.contentPane.add(this.tabbedPane);
 
-        button_addTab = new JButton("タブ追加");
-        button_addTab.setBounds(12, 10, 91, 21);
-        button_addTab.addActionListener(this);
-        contentPane.add(button_addTab);
+        this.button_addTab = new JButton("タブ追加");
+        this.button_addTab.setBounds(12, 10, 91, 21);
+        this.button_addTab.addActionListener(this);
+        this.contentPane.add(this.button_addTab);
 
-        button_deleteTab = new JButton("タブ削除");
-        button_deleteTab.setBounds(115, 10, 91, 21);
-        button_deleteTab.addActionListener(this);
-        contentPane.add(button_deleteTab);
+        this.button_deleteTab = new JButton("タブ削除");
+        this.button_deleteTab.setBounds(115, 10, 91, 21);
+        this.button_deleteTab.addActionListener(this);
+        this.contentPane.add(this.button_deleteTab);
 
-        button_renameTab = new JButton("名前変更");
-        button_renameTab.setBounds(218, 10, 91, 21);
-        button_renameTab.addActionListener(this);
-        contentPane.add(button_renameTab);
+        this.button_renameTab = new JButton("名前変更");
+        this.button_renameTab.setBounds(218, 10, 91, 21);
+        this.button_renameTab.addActionListener(this);
+        this.contentPane.add(this.button_renameTab);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object object = e.getSource();
 
-        if(object == button_addTab){
-            String tabName = JOptionPane.showInputDialog(frame, "タブ名を入力してください");
-            if(Objects.isNull(tabName)){
+        if (object == this.button_addTab) {
+            String tabName = JOptionPane.showInputDialog(this, "タブ名を入力してください");
+            if (Objects.isNull(tabName)) {
                 return;
             }
 
             EventPanel eventPanel = new EventPanel();
             JPanel panel = eventPanel.addPanel();
-            tabbedPane.addTab(tabName, panel);
-            tabbedPane.setSelectedComponent(panel);
+            this.tabbedPane.addTab(tabName, panel);
+            this.tabbedPane.setSelectedComponent(panel);
 
             Logger.getGlobal().info("Add tab : " + tabName);
-        }else if(object == button_deleteTab){
-            if(tabbedPane.getSelectedIndex() == 0){
-                JOptionPane.showMessageDialog(frame, "このタブは削除できません");
+        } else if (object == this.button_deleteTab) {
+            if (this.tabbedPane.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(this, "このタブは削除できません");
                 return;
             }
 
-            int ret = JOptionPane.showConfirmDialog(frame, "このタブを削除してもいいですか？");
-            if(ret != JOptionPane.YES_OPTION){
+            int ret = JOptionPane.showConfirmDialog(this, "このタブを削除してもいいですか？");
+            if (ret != JOptionPane.YES_OPTION) {
                 return;
             }
 
-            int index = tabbedPane.getSelectedIndex();
-            String tabName = tabbedPane.getTitleAt(index);
-            tabbedPane.remove(index);
+            int index = this.tabbedPane.getSelectedIndex();
+            String tabName = this.tabbedPane.getTitleAt(index);
+            this.tabbedPane.remove(index);
 
             Logger.getGlobal().info("Delete tab : " + tabName);
-        }else if(object == button_renameTab){
-            if(tabbedPane.getSelectedIndex() == 0){
-                JOptionPane.showMessageDialog(frame, "このタブは名前を変更できません");
+        } else if (object == this.button_renameTab) {
+            if (this.tabbedPane.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(this, "このタブは名前を変更できません");
                 return;
             }
 
-            String tabName = JOptionPane.showInputDialog(frame, "新しいタブ名を入力してください");
-            if(Objects.isNull(tabName)){
+            String tabName = JOptionPane.showInputDialog(this, "新しいタブ名を入力してください");
+            if (Objects.isNull(tabName)) {
                 return;
             }
 
-            String old = tabbedPane.getTitleAt(tabbedPane.getSelectedIndex());
-            tabbedPane.setTitleAt(tabbedPane.getSelectedIndex(), tabName);
+            String old = this.tabbedPane.getTitleAt(this.tabbedPane.getSelectedIndex());
+            this.tabbedPane.setTitleAt(this.tabbedPane.getSelectedIndex(), tabName);
 
             Logger.getGlobal().info("Change tabName : " + old + " -> " + tabName);
         }
     }
 
-    public static String getCurrentTabName(){
-        return currentTabName;
+    public static String getCurrentTabName() {
+        return MainLoader.currentTabName;
     }
 
-    public static int getCurrentTabNo(){
-        return currentTabNo;
+    public static int getCurrentTabNo() {
+        return MainLoader.currentTabNo;
     }
 
-    private static void initializeLogger(){
+    private static void initializeLogger() {
         if (Objects.isNull(System.getProperty("java.util.logging.config.file")) &&
                 Objects.isNull(System.getProperty("java.util.logging.config.class"))) {
-            try(InputStream is = MainLoader.class.getResourceAsStream("../logging.properties")){
-                if(!Objects.isNull(is)){
+            try (InputStream is = MainLoader.class.getResourceAsStream("../logging.properties")) {
+                if (!Objects.isNull(is)) {
                     LogManager.getLogManager().readConfiguration(is);
                 }
             } catch (IOException e) {
                 // use default logging config.
+                Logger.getGlobal().info(e.toString());
             }
         }
     }

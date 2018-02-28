@@ -11,6 +11,11 @@ import kancolle.structure.ShipType;
 
 public abstract class FleetPanel extends JPanel implements ActionListener {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6385115609685644561L;
+
     public abstract JPanel addPanel(final String title, final Point point);
 
     public abstract void setComboBoxType(final List<ShipType> shipTypes);

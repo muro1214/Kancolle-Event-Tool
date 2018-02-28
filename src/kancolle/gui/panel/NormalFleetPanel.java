@@ -21,6 +21,10 @@ import kancolle.structure.ShipType;
 
 public class NormalFleetPanel extends FleetPanel {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1372992720877387092L;
     private JPanel panel;
     private JLabel label_1;
     private JComboBox<String> comboBox_Type_1;
@@ -45,105 +49,105 @@ public class NormalFleetPanel extends FleetPanel {
 
     @Override
     public JPanel addPanel(final String title, final Point point) {
-        panel = new JPanel();
-        panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), title, TitledBorder.LEADING,
+        this.panel = new JPanel();
+        this.panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), title, TitledBorder.LEADING,
                 TitledBorder.TOP, null, new Color(0, 0, 0)));
-        panel.setBounds(point.x, point.y, 304, 206);
-        panel.setLayout(null);
+        this.panel.setBounds(point.x, point.y, 304, 206);
+        this.panel.setLayout(null);
 
-        label_1 = new JLabel("1");
-        label_1.setBounds(12, 24, 13, 13);
-        panel.add(label_1);
+        this.label_1 = new JLabel("1");
+        this.label_1.setBounds(12, 24, 13, 13);
+        this.panel.add(this.label_1);
 
-        comboBox_Type_1 = new JComboBox<String>();
-        comboBox_Type_1.setBounds(26, 21, 100, 19);
-        comboBox_Type_1.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
-        comboBox_Type_1.addActionListener(this);
-        panel.add(comboBox_Type_1);
+        this.comboBox_Type_1 = new JComboBox<>();
+        this.comboBox_Type_1.setBounds(26, 21, 100, 19);
+        this.comboBox_Type_1.setModel(new DefaultComboBoxModel<>(new String[] { "艦種" }));
+        this.comboBox_Type_1.addActionListener(this);
+        this.panel.add(this.comboBox_Type_1);
 
-        comboBox_Name_1 = new JComboBox<String>();
-        comboBox_Name_1.setBounds(138, 21, 154, 19);
-        comboBox_Name_1.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
-        panel.add(comboBox_Name_1);
+        this.comboBox_Name_1 = new JComboBox<>();
+        this.comboBox_Name_1.setBounds(138, 21, 154, 19);
+        this.comboBox_Name_1.setModel(new DefaultComboBoxModel<>(new String[] { "艦娘" }));
+        this.panel.add(this.comboBox_Name_1);
 
-        label_2 = new JLabel("2");
-        label_2.setBounds(12, 55, 13, 13);
-        panel.add(label_2);
+        this.label_2 = new JLabel("2");
+        this.label_2.setBounds(12, 55, 13, 13);
+        this.panel.add(this.label_2);
 
-        comboBox_Type_2 = new JComboBox<String>();
-        comboBox_Type_2.setBounds(26, 52, 100, 19);
-        comboBox_Type_2.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
-        comboBox_Type_2.addActionListener(this);
-        panel.add(comboBox_Type_2);
+        this.comboBox_Type_2 = new JComboBox<>();
+        this.comboBox_Type_2.setBounds(26, 52, 100, 19);
+        this.comboBox_Type_2.setModel(new DefaultComboBoxModel<>(new String[] { "艦種" }));
+        this.comboBox_Type_2.addActionListener(this);
+        this.panel.add(this.comboBox_Type_2);
 
-        comboBox_Name_2 = new JComboBox<String>();
-        comboBox_Name_2.setBounds(138, 52, 154, 19);
-        comboBox_Name_2.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
-        panel.add(comboBox_Name_2);
+        this.comboBox_Name_2 = new JComboBox<>();
+        this.comboBox_Name_2.setBounds(138, 52, 154, 19);
+        this.comboBox_Name_2.setModel(new DefaultComboBoxModel<>(new String[] { "艦娘" }));
+        this.panel.add(this.comboBox_Name_2);
 
-        label_3 = new JLabel("3");
-        label_3.setBounds(12, 86, 13, 13);
-        panel.add(label_3);
+        this.label_3 = new JLabel("3");
+        this.label_3.setBounds(12, 86, 13, 13);
+        this.panel.add(this.label_3);
 
-        comboBox_Type_3 = new JComboBox<String>();
-        comboBox_Type_3.setBounds(26, 83, 100, 19);
-        comboBox_Type_3.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
-        comboBox_Type_3.addActionListener(this);
-        panel.add(comboBox_Type_3);
+        this.comboBox_Type_3 = new JComboBox<>();
+        this.comboBox_Type_3.setBounds(26, 83, 100, 19);
+        this.comboBox_Type_3.setModel(new DefaultComboBoxModel<>(new String[] { "艦種" }));
+        this.comboBox_Type_3.addActionListener(this);
+        this.panel.add(this.comboBox_Type_3);
 
-        comboBox_Name_3 = new JComboBox<String>();
-        comboBox_Name_3.setBounds(138, 83, 154, 19);
-        comboBox_Name_3.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
-        panel.add(comboBox_Name_3);
+        this.comboBox_Name_3 = new JComboBox<>();
+        this.comboBox_Name_3.setBounds(138, 83, 154, 19);
+        this.comboBox_Name_3.setModel(new DefaultComboBoxModel<>(new String[] { "艦娘" }));
+        this.panel.add(this.comboBox_Name_3);
 
-        label_4 = new JLabel("4");
-        label_4.setBounds(12, 117, 13, 13);
-        panel.add(label_4);
+        this.label_4 = new JLabel("4");
+        this.label_4.setBounds(12, 117, 13, 13);
+        this.panel.add(this.label_4);
 
-        comboBox_Type_4 = new JComboBox<String>();
-        comboBox_Type_4.setBounds(26, 114, 100, 19);
-        comboBox_Type_4.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
-        comboBox_Type_4.addActionListener(this);
-        panel.add(comboBox_Type_4);
+        this.comboBox_Type_4 = new JComboBox<>();
+        this.comboBox_Type_4.setBounds(26, 114, 100, 19);
+        this.comboBox_Type_4.setModel(new DefaultComboBoxModel<>(new String[] { "艦種" }));
+        this.comboBox_Type_4.addActionListener(this);
+        this.panel.add(this.comboBox_Type_4);
 
-        comboBox_Name_4 = new JComboBox<String>();
-        comboBox_Name_4.setBounds(138, 114, 154, 19);
-        comboBox_Name_4.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
-        panel.add(comboBox_Name_4);
+        this.comboBox_Name_4 = new JComboBox<>();
+        this.comboBox_Name_4.setBounds(138, 114, 154, 19);
+        this.comboBox_Name_4.setModel(new DefaultComboBoxModel<>(new String[] { "艦娘" }));
+        this.panel.add(this.comboBox_Name_4);
 
-        label_5 = new JLabel("5");
-        label_5.setBounds(12, 148, 13, 13);
-        panel.add(label_5);
+        this.label_5 = new JLabel("5");
+        this.label_5.setBounds(12, 148, 13, 13);
+        this.panel.add(this.label_5);
 
-        comboBox_Type_5 = new JComboBox<String>();
-        comboBox_Type_5.setBounds(26, 145, 100, 19);
-        comboBox_Type_5.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
-        comboBox_Type_5.addActionListener(this);
-        panel.add(comboBox_Type_5);
+        this.comboBox_Type_5 = new JComboBox<>();
+        this.comboBox_Type_5.setBounds(26, 145, 100, 19);
+        this.comboBox_Type_5.setModel(new DefaultComboBoxModel<>(new String[] { "艦種" }));
+        this.comboBox_Type_5.addActionListener(this);
+        this.panel.add(this.comboBox_Type_5);
 
-        comboBox_Name_5 = new JComboBox<String>();
-        comboBox_Name_5.setBounds(138, 145, 154, 19);
-        comboBox_Name_5.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
-        panel.add(comboBox_Name_5);
+        this.comboBox_Name_5 = new JComboBox<>();
+        this.comboBox_Name_5.setBounds(138, 145, 154, 19);
+        this.comboBox_Name_5.setModel(new DefaultComboBoxModel<>(new String[] { "艦娘" }));
+        this.panel.add(this.comboBox_Name_5);
 
-        label_6 = new JLabel("6");
-        label_6.setBounds(12, 179, 13, 13);
-        panel.add(label_6);
+        this.label_6 = new JLabel("6");
+        this.label_6.setBounds(12, 179, 13, 13);
+        this.panel.add(this.label_6);
 
-        comboBox_Type_6 = new JComboBox<String>();
-        comboBox_Type_6.setBounds(26, 176, 100, 19);
-        comboBox_Type_6.setModel(new DefaultComboBoxModel<String>(new String[] { "艦種" }));
-        comboBox_Type_6.addActionListener(this);
-        panel.add(comboBox_Type_6);
+        this.comboBox_Type_6 = new JComboBox<>();
+        this.comboBox_Type_6.setBounds(26, 176, 100, 19);
+        this.comboBox_Type_6.setModel(new DefaultComboBoxModel<>(new String[] { "艦種" }));
+        this.comboBox_Type_6.addActionListener(this);
+        this.panel.add(this.comboBox_Type_6);
 
-        comboBox_Name_6 = new JComboBox<String>();
-        comboBox_Name_6.setBounds(138, 176, 154, 19);
-        comboBox_Name_6.setModel(new DefaultComboBoxModel<String>(new String[] { "艦娘" }));
-        panel.add(comboBox_Name_6);
+        this.comboBox_Name_6 = new JComboBox<>();
+        this.comboBox_Name_6.setBounds(138, 176, 154, 19);
+        this.comboBox_Name_6.setModel(new DefaultComboBoxModel<>(new String[] { "艦娘" }));
+        this.panel.add(this.comboBox_Name_6);
 
         Logger.getGlobal().info("Added NormalFleetPanel.");
 
-        return panel;
+        return this.panel;
     }
 
     protected void setComboBoxNameList(int fleetNo, List<String> kanmusuList) {
@@ -151,26 +155,26 @@ public class NormalFleetPanel extends FleetPanel {
 
         switch (fleetNo) {
         case 1:
-            targetComboBox = comboBox_Name_1;
+            targetComboBox = this.comboBox_Name_1;
             break;
         case 2:
-            targetComboBox = comboBox_Name_2;
+            targetComboBox = this.comboBox_Name_2;
             break;
         case 3:
-            targetComboBox = comboBox_Name_3;
+            targetComboBox = this.comboBox_Name_3;
             break;
         case 4:
-            targetComboBox = comboBox_Name_4;
+            targetComboBox = this.comboBox_Name_4;
             break;
         case 5:
-            targetComboBox = comboBox_Name_5;
+            targetComboBox = this.comboBox_Name_5;
             break;
         case 6:
-            targetComboBox = comboBox_Name_6;
+            targetComboBox = this.comboBox_Name_6;
             break;
         }
 
-        targetComboBox.setModel(new DefaultComboBoxModel<String>((String[]) kanmusuList.toArray(new String[0])));
+        targetComboBox.setModel(new DefaultComboBoxModel<>(kanmusuList.toArray(new String[0])));
     }
 
     @Override
@@ -184,17 +188,17 @@ public class NormalFleetPanel extends FleetPanel {
                 EventPanel.getLevelFilter(), EventPanel.getTag());
 
         int fleetNo = 0;
-        if (comboBox == comboBox_Type_1) {
+        if (comboBox == this.comboBox_Type_1) {
             fleetNo = 1;
-        } else if (comboBox == comboBox_Type_2) {
+        } else if (comboBox == this.comboBox_Type_2) {
             fleetNo = 2;
-        } else if (comboBox == comboBox_Type_3) {
+        } else if (comboBox == this.comboBox_Type_3) {
             fleetNo = 3;
-        } else if (comboBox == comboBox_Type_4) {
+        } else if (comboBox == this.comboBox_Type_4) {
             fleetNo = 4;
-        } else if (comboBox == comboBox_Type_5) {
+        } else if (comboBox == this.comboBox_Type_5) {
             fleetNo = 5;
-        } else if (comboBox == comboBox_Type_6) {
+        } else if (comboBox == this.comboBox_Type_6) {
             fleetNo = 6;
         }
 
@@ -207,30 +211,30 @@ public class NormalFleetPanel extends FleetPanel {
                 .map(ShipType::typeName).collect(Collectors.toList());
         shipTypeStrs.add(0, "艦種");
 
-        comboBox_Type_1.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Type_2.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Type_3.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Type_4.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Type_5.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
-        comboBox_Type_6.setModel(new DefaultComboBoxModel<String>((String[]) shipTypeStrs.toArray(new String[0])));
+        this.comboBox_Type_1.setModel(new DefaultComboBoxModel<>(shipTypeStrs.toArray(new String[0])));
+        this.comboBox_Type_2.setModel(new DefaultComboBoxModel<>(shipTypeStrs.toArray(new String[0])));
+        this.comboBox_Type_3.setModel(new DefaultComboBoxModel<>(shipTypeStrs.toArray(new String[0])));
+        this.comboBox_Type_4.setModel(new DefaultComboBoxModel<>(shipTypeStrs.toArray(new String[0])));
+        this.comboBox_Type_5.setModel(new DefaultComboBoxModel<>(shipTypeStrs.toArray(new String[0])));
+        this.comboBox_Type_6.setModel(new DefaultComboBoxModel<>(shipTypeStrs.toArray(new String[0])));
     }
 
     @Override
-    public List<String> getFleetKanmusus(){
-        return Arrays.asList(comboBox_Name_1.getSelectedItem().toString(),
-                comboBox_Name_2.getSelectedItem().toString(),
-                comboBox_Name_3.getSelectedItem().toString(),
-                comboBox_Name_4.getSelectedItem().toString(),
-                comboBox_Name_5.getSelectedItem().toString(),
-                comboBox_Name_6.getSelectedItem().toString());
+    public List<String> getFleetKanmusus() {
+        return Arrays.asList(this.comboBox_Name_1.getSelectedItem().toString(),
+                this.comboBox_Name_2.getSelectedItem().toString(),
+                this.comboBox_Name_3.getSelectedItem().toString(),
+                this.comboBox_Name_4.getSelectedItem().toString(),
+                this.comboBox_Name_5.getSelectedItem().toString(),
+                this.comboBox_Name_6.getSelectedItem().toString());
     }
 
     @Override
     public void actionPerformed(final ActionEvent e) {
         Object object = e.getSource();
 
-        if (object == comboBox_Type_1 || object == comboBox_Type_2 || object == comboBox_Type_3 ||
-                object == comboBox_Type_4 || object == comboBox_Type_5 || object == comboBox_Type_6) {
+        if (object == this.comboBox_Type_1 || object == this.comboBox_Type_2 || object == this.comboBox_Type_3 ||
+                object == this.comboBox_Type_4 || object == this.comboBox_Type_5 || object == this.comboBox_Type_6) {
             comboBoxTypeAction((JComboBox<?>) object);
         }
     }

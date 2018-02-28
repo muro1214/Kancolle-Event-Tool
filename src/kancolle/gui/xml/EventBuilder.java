@@ -23,23 +23,23 @@ import kancolle.structure.Kanmusu;
 public class EventBuilder {
     final Document document;
 
-    public EventBuilder(){
+    public EventBuilder() {
         DocumentBuilder documentBuilder = null;
-        try{
+        try {
             documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        }catch(ParserConfigurationException e){
+        } catch (ParserConfigurationException e) {
             Logger.getGlobal().severe(e.toString());
         }
 
-        document = documentBuilder.newDocument();
+        this.document = documentBuilder.newDocument();
     }
 
-    public boolean write(final Path path){
+    public boolean write(final Path path) {
         Transformer transformer = null;
-        try{
+        try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             transformer = transformerFactory.newTransformer();
-        }catch(TransformerConfigurationException e){
+        } catch (TransformerConfigurationException e) {
             Logger.getGlobal().severe(e.toString());
             return false;
         }
@@ -49,9 +49,9 @@ public class EventBuilder {
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
 
-        try{
-            transformer.transform(new DOMSource(document), new StreamResult(path.toFile()));
-        }catch(TransformerException e){
+        try {
+            transformer.transform(new DOMSource(this.document), new StreamResult(path.toFile()));
+        } catch (TransformerException e) {
             Logger.getGlobal().severe(e.toString());
             return false;
         }
@@ -60,35 +60,35 @@ public class EventBuilder {
     }
 
     public Element setEventAreaInfo(final int no, final String areaName, final String tagName,
-            final FleetType fleetType, final boolean isFastOnly){
-        Element eventArea = document.createElement("event");
+            final FleetType fleetType, final boolean isFastOnly) {
+        Element eventArea = this.document.createElement("event");
         eventArea.setAttribute("no", String.valueOf(no));
         eventArea.setAttribute("area", areaName);
         eventArea.setAttribute("tag", tagName);
         eventArea.setAttribute("fleet-type", fleetType.typeName());
         eventArea.setAttribute("fast-only", isFastOnly ? "yes" : "no");
 
-        document.appendChild(eventArea);
+        this.document.appendChild(eventArea);
 
         return eventArea;
     }
 
-    public Element buildKanmusuElement(final int no, final Kanmusu kanmusu){
-        Element element = document.createElement("kanmusu");
+    public Element buildKanmusuElement(final int no, final Kanmusu kanmusu) {
+        Element element = this.document.createElement("kanmusu");
         element.setAttribute("no", String.valueOf(no));
         element.setAttribute("id", String.valueOf(kanmusu.id()));
         element.setAttribute("ship-type", kanmusu.shipTypeString());
         element.setAttribute("level", String.valueOf(kanmusu.level()));
         element.setAttribute("speed", kanmusu.speedString());
-        element.appendChild(document.createTextNode(kanmusu.name()));
+        element.appendChild(this.document.createTextNode(kanmusu.name()));
 
         return element;
     }
 
-    public Element buildFilterElement(final String level){
-        Element element = document.createElement("filter");
+    public Element buildFilterElement(final String level) {
+        Element element = this.document.createElement("filter");
         element.setAttribute("name", "level");
-        element.appendChild(document.createTextNode(level));
+        element.appendChild(this.document.createTextNode(level));
 
         return element;
     }

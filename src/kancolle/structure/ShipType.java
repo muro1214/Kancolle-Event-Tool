@@ -7,7 +7,7 @@ public enum ShipType {
     AMPHIBIOUS_ASSAULT_SHIP("揚陸艦"),
     ARMORED_AIRCRAFT_CARRIER("装甲空母"),
     AVIATION_BATTLESHIP("航空戦艦"),
-    BATTLESIHIP( "戦艦"),
+    BATTLESIHIP("戦艦"),
     DESTROYER("駆逐艦"),
     DESTROYER_ESCORT("海防艦"),
     FLEET_OILER("補給艦"),
@@ -28,7 +28,7 @@ public enum ShipType {
     }
 
     public String typeName() {
-        return typeName;
+        return this.typeName;
     }
 
     public static ShipType getType(final String typeName) {
