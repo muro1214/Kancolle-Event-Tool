@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +25,13 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import org.w3c.dom.Element;
+
 import kancolle.fleet.FleetType;
 import kancolle.fleet.Fleets;
+import kancolle.gui.MainLoader;
+import kancolle.gui.xml.EventBuilder;
+import kancolle.structure.Kanmusu;
 import kancolle.structure.ShipType;
 
 public class EventPanel extends JPanel implements ActionListener {
@@ -178,6 +187,7 @@ public class EventPanel extends JPanel implements ActionListener {
         } else if ((object == radioButton_2 || object == radioButton_3 || object == radioButton_4) &&
                 (radioButton_2.isSelected() || radioButton_3.isSelected() || radioButton_4.isSelected())) {
             if (isBeforeCombinedFleet) {
+                Logger.getGlobal().info("艦隊情報を変更 -> " + getCurrentFleetType().typeName());
                 return;
             }
 
@@ -197,9 +207,10 @@ public class EventPanel extends JPanel implements ActionListener {
             panel.repaint();
 
             isBeforeCombinedFleet = true;
-            Logger.getGlobal().info("艦隊情報を変更 -> 連合艦隊");
+            Logger.getGlobal().info("艦隊情報を変更 -> " + getCurrentFleetType().typeName());
         }else if(object == button){
             setKanmusuTag();
+            saveXmlFile();
         }
     }
 
@@ -238,9 +249,22 @@ public class EventPanel extends JPanel implements ActionListener {
         return textField_tag.getText();
     }
 
-    public void setKanmusuTag(){
+    private FleetType getCurrentFleetType(){
+        if(radioButton.isSelected()){
+            return FleetType.NORMAL;
+        }else if(radioButton_1.isSelected()){
+            return FleetType.STRIKING_FORCE;
+        }else if(radioButton_2.isSelected()){
+            return FleetType.CARRIER_TASK_FORCE;
+        }else if(radioButton_3.isSelected()){
+            return FleetType.SURFACE_TASK_FORCE;
+        }else{
+            return FleetType.TRANSPORT_ESCORT;
+        }
+    }
+
+    private List<String> getAllFleetKanmusus(){
         List<String> kanmusus = new ArrayList<String>();
-        String tag = getTag();
 
         if(radioButton.isSelected()){
             kanmusus.addAll(normalFleetPanel1.getFleetKanmusus());
@@ -251,12 +275,52 @@ public class EventPanel extends JPanel implements ActionListener {
             kanmusus.addAll(normalFleetPanel2.getFleetKanmusus());
         }
 
+        return kanmusus;
+    }
+
+    private int getKanmusuId(String kanmusu){
+        return Integer.parseInt(kanmusu.split(", ")[1].replaceAll("ID#|\\)", ""));
+    }
+
+    private void setKanmusuTag(){
+        List<String> kanmusus = getAllFleetKanmusus();
+        String tag = getTag();
+
         for(String kanmusu : kanmusus){
             if(kanmusu.equals("艦娘")){
                 continue;
             }
-            int id = Integer.parseInt(kanmusu.split(", ")[1].replaceAll("ID#|\\)", ""));
+            int id = getKanmusuId(kanmusu);
             Fleets.setTag(id, tag);
         }
+    }
+
+    private void saveXmlFile(){
+        EventBuilder eventBuilder = new EventBuilder();
+
+        String tabName = MainLoader.getCurrentTabName();
+        Element eventArea = eventBuilder.setEventAreaInfo(MainLoader.getCurrentTabNo(), tabName, getTag(),
+                getCurrentFleetType(), checkBox_fastOnly.isSelected());
+
+        List<String> kanmusus = getAllFleetKanmusus();
+        for(int i = 0; i < kanmusus.size(); i++){
+            if(kanmusus.get(i).equals("艦娘")){
+                continue;
+            }
+            Kanmusu kanmusu = Fleets.getKanmusuFromId(getKanmusuId(kanmusus.get(i)));
+            eventArea.appendChild(eventBuilder.buildKanmusuElement(i + 1, kanmusu));
+        }
+
+        eventArea.appendChild(eventBuilder.buildFilterElement(textField_levelFilter.getText()));
+
+        Path path = Paths.get(String.format("xml\\%s.xml", tabName));
+        try{
+            Files.deleteIfExists(path);
+        }catch(IOException e){
+            Logger.getGlobal().warning(e.toString());
+        }
+
+        eventBuilder.write(path);
+        Logger.getGlobal().info("save xml file : " + path.getFileName().toString());
     }
 }

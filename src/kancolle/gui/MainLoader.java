@@ -46,6 +46,7 @@ public class MainLoader extends JFrame implements ActionListener{
 
     private static MainLoader frame;
     private static String currentTabName;
+    private static int currentTabNo;
 
     public static void main(String[] args) {
         initializeLogger();
@@ -111,6 +112,7 @@ public class MainLoader extends JFrame implements ActionListener{
         tabbedPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
+                currentTabNo = tabbedPane.getSelectedIndex();
                 currentTabName = tabbedPane.getTitleAt(tabbedPane.getSelectedIndex());
             }
         });
@@ -188,6 +190,10 @@ public class MainLoader extends JFrame implements ActionListener{
 
     public static String getCurrentTabName(){
         return currentTabName;
+    }
+
+    public static int getCurrentTabNo(){
+        return currentTabNo;
     }
 
     private static void initializeLogger(){

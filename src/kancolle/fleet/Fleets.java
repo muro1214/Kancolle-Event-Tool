@@ -97,9 +97,13 @@ public class Fleets {
         return Objects.isNull(initial) ? key : initial;
     }
 
-    public static void setTag(final int id, final String tag){
-        Kanmusu kanmusu = kanmusuList.stream().filter(it -> it.id() == id)
+    public static Kanmusu getKanmusuFromId(final int id){
+        return kanmusuList.stream().filter(it -> it.id() == id)
                 .findFirst().get();
+    }
+
+    public static void setTag(final int id, final String tag){
+        Kanmusu kanmusu = getKanmusuFromId(id);
 
         kanmusu.setTag(tag);
         Logger.getGlobal().info(kanmusu + " sets tag : " + tag);
