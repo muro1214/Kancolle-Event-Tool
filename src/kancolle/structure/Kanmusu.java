@@ -31,8 +31,6 @@ public class Kanmusu {
         speed = Speed.getType(tmp.get(25));
 //        tag = tmp.get(55);
         tag = "";
-
-        System.out.println(initialName);
     }
 
     public int id() {
