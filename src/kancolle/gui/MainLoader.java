@@ -4,10 +4,10 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
-import java.util.logging.FileHandler;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,14 +48,7 @@ public class MainLoader extends JFrame implements ActionListener{
     private static String currentTabName;
 
     public static void main(String[] args) {
-        Logger logger = Logger.getGlobal();
-        try {
-            FileHandler fileHandler = new FileHandler("Kancolle_Event_Tool.log", false);
-            fileHandler.setFormatter(new SimpleFormatter());
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        initializeLogger();
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -195,5 +188,18 @@ public class MainLoader extends JFrame implements ActionListener{
 
     public static String getCurrentTabName(){
         return currentTabName;
+    }
+
+    private static void initializeLogger(){
+        if (Objects.isNull(System.getProperty("java.util.logging.config.file")) &&
+                Objects.isNull(System.getProperty("java.util.logging.config.class"))) {
+            try(InputStream is = MainLoader.class.getResourceAsStream("../logging.properties")){
+                if(!Objects.isNull(is)){
+                    LogManager.getLogManager().readConfiguration(is);
+                }
+            } catch (IOException e) {
+                // use default logging config.
+            }
+        }
     }
 }
