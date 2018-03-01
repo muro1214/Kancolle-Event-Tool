@@ -32,7 +32,7 @@ My Kanmusu list is based on csv file that made by logbook tool.
 ## Requirement
 
 * Java 1.8 or more
-* logbook
+* [logbook](https://github.com/nekopanda/logbook) latest version
 
 ## Usage
 
@@ -40,7 +40,7 @@ My Kanmusu list is based on csv file that made by logbook tool.
 
 ## Installation
 
-1. Download latest version from here(TBD).
+1. Download latest version from [here](https://github.com/muro1214/Kancolle-Event-Tool/releases/latest).
 1. Unzip it.
 
 ## Author
