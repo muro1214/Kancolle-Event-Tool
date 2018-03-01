@@ -14,9 +14,9 @@ This tool is supporting the fleet organization for Kantai Collection(Kancolle).
 
 ## Description
 
-`Kancolle Event Supporter` is GUI tool that manually makes the fleet organization of event area for Kancolle.
-Of cource, it supports event tag, a combined fleet and striking fleet.
-My Kanmusu list is based on csv file that made by logbook tool.
+`Kancolle Event Supporter` is GUI tool that makes the fleet organization of event area for Kancolle.  
+Of cource, it supports event tag, a combined fleet and striking fleet.  
+My Kanmusu list is based on csv file that made by logbook tool.  
 
 ## Features
 
