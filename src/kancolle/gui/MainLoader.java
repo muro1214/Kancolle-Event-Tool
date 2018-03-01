@@ -28,12 +28,9 @@ import javax.swing.event.ChangeListener;
 import kancolle.gui.panel.EventPanel;
 import kancolle.gui.panel.SettingPanel;
 
+@SuppressWarnings("serial")
 public class MainLoader extends JFrame implements ActionListener {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 3939230639977237978L;
     private JPanel contentPane;
     JTabbedPane tabbedPane;
     private JMenuBar menuBar;
@@ -87,12 +84,15 @@ public class MainLoader extends JFrame implements ActionListener {
         this.menuBar.add(this.mnFile);
 
         this.mntmOpen = new JMenuItem("Open");
+        this.mntmOpen.addActionListener(this);
         this.mnFile.add(this.mntmOpen);
 
         this.mntmSave = new JMenuItem("Save");
+        this.mntmSave.addActionListener(this);
         this.mnFile.add(this.mntmSave);
 
         this.mntmSaveAs = new JMenuItem("Save As");
+        this.mntmSaveAs.addActionListener(this);
         this.mnFile.add(this.mntmSaveAs);
 
         this.separator = new JSeparator();
@@ -200,6 +200,7 @@ public class MainLoader extends JFrame implements ActionListener {
     public static int getCurrentTabNo() {
         return MainLoader.currentTabNo;
     }
+
 
     private static void initializeLogger() {
         if (Objects.isNull(System.getProperty("java.util.logging.config.file")) &&
