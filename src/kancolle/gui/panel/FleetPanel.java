@@ -13,7 +13,7 @@ public abstract class FleetPanel extends JPanel implements ActionListener {
     /**
      *
      */
-    private static final long serialVersionUID = -6385115609685644561L;
+    private static final long serialVersionUID = 2832580630781124886L;
 
     public abstract JPanel addPanel(final String title, final Point point);
 

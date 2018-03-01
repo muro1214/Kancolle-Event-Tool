@@ -56,6 +56,7 @@ public class EventPanel extends JPanel implements ActionListener {
     private static JTextField textField_levelFilter;
     private static JCheckBox checkBox_fastOnly;
     private JButton button;
+    private JButton button_2;
 
     private JPanel panel_fleet1 = null;
     private JPanel panel_fleet2 = null;
@@ -150,10 +151,15 @@ public class EventPanel extends JPanel implements ActionListener {
         checkBox_fastOnly.setBounds(8, 54, 103, 21);
         this.panel_4.add(checkBox_fastOnly);
 
-        this.button = new JButton("適用");
+        this.button = new JButton("保存");
         this.button.setBounds(675, 108, 91, 21);
         this.button.addActionListener(this);
         this.panel.add(this.button);
+
+        this.button_2 = new JButton("読み込み");
+        this.button_2.setBounds(675, 136, 91, 21);
+        this.button_2.addActionListener(this);
+        this.panel.add(this.button_2);
 
         return this.panel;
     }
