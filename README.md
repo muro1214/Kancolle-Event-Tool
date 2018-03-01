@@ -1,6 +1,16 @@
 # Kancolle Event Supporter
 
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+
 This tool is supporting the fleet organization for Kantai Collection(Kancolle).
+
+* [Description](#description)
+* [Features](#features)
+* [Requirement](#requirement)
+* [Usage](#usage)
+* [Installation](#installation)
+* [Author](#author)
+* [License](#license)
 
 ## Description
 
@@ -34,7 +44,9 @@ My Kanmusu list is based on csv file that made by logbook tool.
 1. Unzip it.
 
 ## Author
+
 [Izuna](https://github.com/muro1214)
 
 ## License
-[MIT](https://github.com/muro1214/Kancolle-Event-Tool/blob/release0.0.1/LICENSE)
+
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
