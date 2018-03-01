@@ -168,8 +168,7 @@ public class StrikingFleetPanel extends FleetPanel {
         return this.panel;
     }
 
-    @Override
-    protected void setComboBoxNameList(int fleetNo, List<String> kanmusuList) {
+    private void setComboBoxNameList(int fleetNo, List<String> kanmusuList) {
         JComboBox<String> targetComboBox = null;
 
         switch (fleetNo) {
@@ -199,8 +198,7 @@ public class StrikingFleetPanel extends FleetPanel {
         targetComboBox.setModel(new DefaultComboBoxModel<>(kanmusuList.toArray(new String[0])));
     }
 
-    @Override
-    protected void comboBoxTypeAction(final JComboBox<?> comboBox) {
+    private void comboBoxTypeAction(final JComboBox<?> comboBox) {
         ShipType shipType = ShipType.getType(comboBox.getSelectedItem().toString());
         if (Objects.isNull(shipType)) {
             return;
