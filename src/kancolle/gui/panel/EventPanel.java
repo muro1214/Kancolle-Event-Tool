@@ -34,12 +34,8 @@ import kancolle.gui.xml.EventBuilder;
 import kancolle.structure.Kanmusu;
 import kancolle.structure.ShipType;
 
-public class EventPanel extends JPanel implements ActionListener {
+public class EventPanel implements ActionListener {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = -5204755549072287528L;
     private JPanel panel;
     private JPanel panel_2;
     private JPanel panel_3;

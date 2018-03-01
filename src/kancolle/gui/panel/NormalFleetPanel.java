@@ -21,10 +21,6 @@ import kancolle.structure.ShipType;
 
 public class NormalFleetPanel extends FleetPanel {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1372992720877387092L;
     private JPanel panel;
     private JLabel label_1;
     private JComboBox<String> comboBox_Type_1;

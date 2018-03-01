@@ -8,12 +8,7 @@ import javax.swing.JPanel;
 
 import kancolle.structure.ShipType;
 
-public abstract class FleetPanel extends JPanel implements ActionListener {
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 2832580630781124886L;
+public abstract class FleetPanel implements ActionListener {
 
     public abstract JPanel addPanel(final String title, final Point point);
 

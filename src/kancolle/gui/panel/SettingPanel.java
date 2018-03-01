@@ -19,12 +19,8 @@ import javax.swing.table.DefaultTableModel;
 import kancolle.fleet.Fleets;
 import kancolle.structure.ShipType;
 
-public class SettingPanel extends JPanel implements ActionListener {
+public class SettingPanel implements ActionListener {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = -4511128627342310452L;
     private JPanel panel;
     private JPanel panel_1;
     private JPanel panel_2;
