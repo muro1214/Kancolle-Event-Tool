@@ -30,6 +30,8 @@ public class SettingPanel implements ActionListener {
     private JButton button_openCsv;
     private JTable table;
 
+    private static boolean isCsvOpened = false;
+
     public JPanel addPanel() {
         this.panel = new JPanel();
         this.panel.setLayout(null);
@@ -140,7 +142,12 @@ public class SettingPanel implements ActionListener {
         if (selected == JFileChooser.APPROVE_OPTION) {
             Fleets.loadMyKanmusuCSVData(fc.getSelectedFile().getAbsolutePath());
             this.textField_csvPath.setText(fc.getSelectedFile().getAbsolutePath());
+            isCsvOpened = true;
         }
+    }
+
+    public static boolean isCsvOpened() {
+        return isCsvOpened;
     }
 
     @Override
