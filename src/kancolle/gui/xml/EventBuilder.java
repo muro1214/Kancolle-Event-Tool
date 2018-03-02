@@ -63,10 +63,7 @@ public class EventBuilder {
             final boolean isFastOnly) {
         Element eventArea = this.document.createElement("event");
         eventArea.setAttribute("name", areaName);
-
-        Element number = this.document.createElement("no");
-        number.appendChild(this.document.createTextNode(String.valueOf(no)));
-        eventArea.appendChild(number);
+        eventArea.setAttribute("no", String.valueOf(no));
 
         Element fastOnly = this.document.createElement("fast-only");
         fastOnly.appendChild(this.document.createTextNode(isFastOnly ? "yes" : "no"));
@@ -81,7 +78,7 @@ public class EventBuilder {
         return eventArea;
     }
 
-    public Element buildFleetElement(final FleetType fleetType){
+    public Element buildFleetElement(final FleetType fleetType) {
         Element fleet = this.document.createElement("fleet");
         fleet.setAttribute("type", fleetType.typeName());
 

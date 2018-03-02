@@ -37,7 +37,8 @@ public class SettingPanel implements ActionListener {
         this.panel.setLayout(null);
 
         this.panel_1 = new JPanel();
-        this.panel_1.setBorder(new TitledBorder(null, "艦娘一覧csvファイル", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        this.panel_1
+                .setBorder(new TitledBorder(null, "艦娘一覧csvファイル", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         this.panel_1.setBounds(12, 10, 769, 59);
         this.panel.add(this.panel_1);
         this.panel_1.setLayout(null);

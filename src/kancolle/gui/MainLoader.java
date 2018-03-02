@@ -32,7 +32,7 @@ import kancolle.gui.panel.SettingPanel;
 public class MainLoader extends JFrame implements ActionListener {
 
     private JPanel contentPane;
-    JTabbedPane tabbedPane;
+    static JTabbedPane tabbedPane;
     private JMenuBar menuBar;
     private JMenu mnFile;
     private JMenu mnHelp;
@@ -48,6 +48,7 @@ public class MainLoader extends JFrame implements ActionListener {
 
     static String currentTabName;
     static int currentTabNo;
+    static MainLoader frame;
 
     public static void main(String[] args) {
         initializeLogger();
@@ -55,7 +56,7 @@ public class MainLoader extends JFrame implements ActionListener {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    MainLoader frame = new MainLoader();
+                    frame = new MainLoader();
                     frame.setResizable(false);
                     frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
@@ -69,6 +70,7 @@ public class MainLoader extends JFrame implements ActionListener {
     public MainLoader() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 835, 445);
+        setTitle("Kancolle Event Supporter");
 
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -112,20 +114,20 @@ public class MainLoader extends JFrame implements ActionListener {
         setContentPane(this.contentPane);
         this.contentPane.setLayout(null);
 
-        this.tabbedPane = new JTabbedPane(SwingConstants.TOP);
-        this.tabbedPane.setBounds(12, 41, 798, 336);
-        this.tabbedPane.addChangeListener(new ChangeListener() {
+        MainLoader.tabbedPane = new JTabbedPane(SwingConstants.TOP);
+        MainLoader.tabbedPane.setBounds(12, 41, 798, 336);
+        MainLoader.tabbedPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                MainLoader.currentTabNo = MainLoader.this.tabbedPane.getSelectedIndex();
-                MainLoader.currentTabName = MainLoader.this.tabbedPane.getTitleAt(MainLoader.this.tabbedPane.getSelectedIndex());
+                MainLoader.currentTabNo = MainLoader.tabbedPane.getSelectedIndex();
+                MainLoader.currentTabName = MainLoader.tabbedPane.getTitleAt(MainLoader.tabbedPane.getSelectedIndex());
             }
         });
 
         SettingPanel settingPanel = new SettingPanel();
-        this.tabbedPane.addTab("設定画面", settingPanel.addPanel());
+        MainLoader.tabbedPane.addTab("設定画面", settingPanel.addPanel());
 
-        this.contentPane.add(this.tabbedPane);
+        this.contentPane.add(MainLoader.tabbedPane);
 
         this.button_addTab = new JButton("タブ追加");
         this.button_addTab.setBounds(12, 10, 91, 21);
@@ -148,7 +150,7 @@ public class MainLoader extends JFrame implements ActionListener {
         Object object = e.getSource();
 
         if (object == this.button_addTab) {
-            if(!SettingPanel.isCsvOpened()){
+            if (!SettingPanel.isCsvOpened()) {
                 JOptionPane.showMessageDialog(this, "先に設定タブからcsvファイルを開いてください", "メッセージ",
                         JOptionPane.ERROR_MESSAGE);
                 return;
@@ -161,12 +163,12 @@ public class MainLoader extends JFrame implements ActionListener {
 
             EventPanel eventPanel = new EventPanel();
             JPanel panel = eventPanel.addPanel();
-            this.tabbedPane.addTab(tabName, panel);
-            this.tabbedPane.setSelectedComponent(panel);
+            MainLoader.tabbedPane.addTab(tabName, panel);
+            MainLoader.tabbedPane.setSelectedComponent(panel);
 
             Logger.getGlobal().info("Add tab : " + tabName);
         } else if (object == this.button_deleteTab) {
-            if (this.tabbedPane.getSelectedIndex() == 0) {
+            if (MainLoader.tabbedPane.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "このタブは削除できません", "メッセージ",
                         JOptionPane.ERROR_MESSAGE);
                 return;
@@ -177,13 +179,13 @@ public class MainLoader extends JFrame implements ActionListener {
                 return;
             }
 
-            int index = this.tabbedPane.getSelectedIndex();
-            String tabName = this.tabbedPane.getTitleAt(index);
-            this.tabbedPane.remove(index);
+            int index = MainLoader.tabbedPane.getSelectedIndex();
+            String tabName = MainLoader.tabbedPane.getTitleAt(index);
+            MainLoader.tabbedPane.remove(index);
 
             Logger.getGlobal().info("Delete tab : " + tabName);
         } else if (object == this.button_renameTab) {
-            if (this.tabbedPane.getSelectedIndex() == 0) {
+            if (MainLoader.tabbedPane.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "このタブは名前を変更できません", "メッセージ",
                         JOptionPane.ERROR_MESSAGE);
                 return;
@@ -194,8 +196,8 @@ public class MainLoader extends JFrame implements ActionListener {
                 return;
             }
 
-            String old = this.tabbedPane.getTitleAt(this.tabbedPane.getSelectedIndex());
-            this.tabbedPane.setTitleAt(this.tabbedPane.getSelectedIndex(), tabName);
+            String old = MainLoader.tabbedPane.getTitleAt(MainLoader.tabbedPane.getSelectedIndex());
+            changeTabName(tabName);
 
             Logger.getGlobal().info("Change tabName : " + old + " -> " + tabName);
         }
@@ -209,6 +211,13 @@ public class MainLoader extends JFrame implements ActionListener {
         return MainLoader.currentTabNo;
     }
 
+    public static MainLoader getFrame(){
+        return MainLoader.frame;
+    }
+
+    public static void changeTabName(final String tabName) {
+        tabbedPane.setTitleAt(tabbedPane.getSelectedIndex(), tabName);
+    }
 
     private static void initializeLogger() {
         if (Objects.isNull(System.getProperty("java.util.logging.config.file")) &&

@@ -259,4 +259,42 @@ public class StrikingFleetPanel extends FleetPanel {
             comboBoxTypeAction((JComboBox<?>) object);
         }
     }
+
+    @Override
+    public void setComboBoxTypeValue(final int no, final String value) {
+        if (no == 1) {
+            this.comboBox_Type_1.setSelectedItem(value);
+        } else if (no == 2) {
+            this.comboBox_Type_2.setSelectedItem(value);
+        } else if (no == 3) {
+            this.comboBox_Type_3.setSelectedItem(value);
+        } else if (no == 4) {
+            this.comboBox_Type_4.setSelectedItem(value);
+        } else if (no == 5) {
+            this.comboBox_Type_5.setSelectedItem(value);
+        } else if (no == 6) {
+            this.comboBox_Type_6.setSelectedItem(value);
+        } else if (no == 7) {
+            this.comboBox_Type_7.setSelectedItem(value);
+        }
+    }
+
+    @Override
+    public void setComboBoxNameValue(final int no, final String value) {
+        if (no == 1) {
+            this.comboBox_Name_1.setSelectedItem(value);
+        } else if (no == 2) {
+            this.comboBox_Name_2.setSelectedItem(value);
+        } else if (no == 3) {
+            this.comboBox_Name_3.setSelectedItem(value);
+        } else if (no == 4) {
+            this.comboBox_Name_4.setSelectedItem(value);
+        } else if (no == 5) {
+            this.comboBox_Name_5.setSelectedItem(value);
+        } else if (no == 6) {
+            this.comboBox_Name_6.setSelectedItem(value);
+        } else if (no == 7) {
+            this.comboBox_Name_7.setSelectedItem(value);
+        }
+    }
 }

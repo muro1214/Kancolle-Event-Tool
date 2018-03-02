@@ -14,5 +14,9 @@ public abstract class FleetPanel implements ActionListener {
 
     public abstract void setComboBoxType(final List<ShipType> shipTypes);
 
+    public abstract void setComboBoxTypeValue(final int no, final String value);
+
+    public abstract void setComboBoxNameValue(final int no, final String value);
+
     public abstract List<String> getFleetKanmusus();
 }

@@ -17,13 +17,16 @@ import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.w3c.dom.Element;
 
@@ -31,6 +34,7 @@ import kancolle.fleet.FleetType;
 import kancolle.fleet.Fleets;
 import kancolle.gui.MainLoader;
 import kancolle.gui.xml.EventBuilder;
+import kancolle.gui.xml.EventLoader;
 import kancolle.structure.Kanmusu;
 import kancolle.structure.ShipType;
 
@@ -166,62 +170,33 @@ public class EventPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object object = e.getSource();
 
-        if(Objects.equals(object, this.beforeObject)){
-            return;
-        }
-
         if (object == this.radioButton) {
-            removeFleetPanels();
+            if (Objects.equals(object, this.beforeObject)) {
+                return;
+            }
 
-            this.normalFleetPanel1 = new NormalFleetPanel();
-            this.panel_fleet1 = this.normalFleetPanel1.addPanel("第一部隊", new Point(12, 60));
-            this.normalFleetPanel1.setComboBoxType(Arrays.asList(ShipType.values()));
-            this.panel.add(this.panel_fleet1);
-
-            this.panel.revalidate();
-            this.panel.repaint();
-
-            this.isBeforeCombinedFleet = false;
-            Logger.getGlobal().info("艦隊情報を変更 -> 通常艦隊");
+            loadNormalPanel();
         } else if (object == this.radioButton_1) {
-            removeFleetPanels();
+            if (Objects.equals(object, this.beforeObject)) {
+                return;
+            }
 
-            this.strikingFleetPanel = new StrikingFleetPanel();
-            this.panel_fleet1 = this.strikingFleetPanel.addPanel("第一部隊", new Point(12, 60));
-            this.strikingFleetPanel.setComboBoxType(Arrays.asList(ShipType.values()));
-            this.panel.add(this.panel_fleet1);
-
-            this.panel.revalidate();
-            this.panel.repaint();
-
-            this.isBeforeCombinedFleet = false;
-            Logger.getGlobal().info("艦隊情報を変更 -> 遊撃艦隊");
+            loadStrinkingPanel();
         } else if (object == this.radioButton_2 || object == this.radioButton_3 || object == this.radioButton_4) {
+            if (Objects.equals(object, this.beforeObject)) {
+                return;
+            }
             if (this.isBeforeCombinedFleet) {
                 Logger.getGlobal().info("艦隊情報を変更 -> " + getCurrentFleetType().typeName());
                 return;
             }
 
-            removeFleetPanels();
-
-            this.normalFleetPanel1 = new NormalFleetPanel();
-            this.panel_fleet1 = this.normalFleetPanel1.addPanel("第一部隊", new Point(12, 60));
-            this.normalFleetPanel1.setComboBoxType(Arrays.asList(ShipType.values()));
-            this.panel.add(this.panel_fleet1);
-
-            this.normalFleetPanel2 = new NormalFleetPanel();
-            this.panel_fleet2 = this.normalFleetPanel2.addPanel("第二部隊", new Point(328, 60));
-            this.normalFleetPanel2.setComboBoxType(Arrays.asList(ShipType.values()));
-            this.panel.add(this.panel_fleet2);
-
-            this.panel.revalidate();
-            this.panel.repaint();
-
-            this.isBeforeCombinedFleet = true;
-            Logger.getGlobal().info("艦隊情報を変更 -> " + getCurrentFleetType().typeName());
+            loadCombinedPanel();
         } else if (object == this.button) {
             setKanmusuTag();
             saveXmlFile();
+        } else if (object == this.button_2) {
+            loadXmlFile();
         }
 
         this.beforeObject = object;
@@ -236,6 +211,56 @@ public class EventPanel implements ActionListener {
             this.panel.remove(this.panel_fleet2);
             this.panel_fleet2 = null;
         }
+    }
+
+    private void loadNormalPanel() {
+        removeFleetPanels();
+
+        this.normalFleetPanel1 = new NormalFleetPanel();
+        this.panel_fleet1 = this.normalFleetPanel1.addPanel("第一部隊", new Point(12, 60));
+        this.normalFleetPanel1.setComboBoxType(Arrays.asList(ShipType.values()));
+        this.panel.add(this.panel_fleet1);
+
+        this.panel.revalidate();
+        this.panel.repaint();
+
+        this.isBeforeCombinedFleet = false;
+        Logger.getGlobal().info("艦隊情報を変更 -> 通常艦隊");
+    }
+
+    private void loadStrinkingPanel() {
+        removeFleetPanels();
+
+        this.strikingFleetPanel = new StrikingFleetPanel();
+        this.panel_fleet1 = this.strikingFleetPanel.addPanel("第一部隊", new Point(12, 60));
+        this.strikingFleetPanel.setComboBoxType(Arrays.asList(ShipType.values()));
+        this.panel.add(this.panel_fleet1);
+
+        this.panel.revalidate();
+        this.panel.repaint();
+
+        this.isBeforeCombinedFleet = false;
+        Logger.getGlobal().info("艦隊情報を変更 -> 遊撃艦隊");
+    }
+
+    private void loadCombinedPanel() {
+        removeFleetPanels();
+
+        this.normalFleetPanel1 = new NormalFleetPanel();
+        this.panel_fleet1 = this.normalFleetPanel1.addPanel("第一部隊", new Point(12, 60));
+        this.normalFleetPanel1.setComboBoxType(Arrays.asList(ShipType.values()));
+        this.panel.add(this.panel_fleet1);
+
+        this.normalFleetPanel2 = new NormalFleetPanel();
+        this.panel_fleet2 = this.normalFleetPanel2.addPanel("第二部隊", new Point(328, 60));
+        this.normalFleetPanel2.setComboBoxType(Arrays.asList(ShipType.values()));
+        this.panel.add(this.panel_fleet2);
+
+        this.panel.revalidate();
+        this.panel.repaint();
+
+        this.isBeforeCombinedFleet = true;
+        Logger.getGlobal().info("艦隊情報を変更 -> " + getCurrentFleetType().typeName());
     }
 
     public static boolean isFastOnly() {
@@ -273,6 +298,20 @@ public class EventPanel implements ActionListener {
             return FleetType.SURFACE_TASK_FORCE;
         } else {
             return FleetType.TRANSPORT_ESCORT;
+        }
+    }
+
+    private void changeRadioButton(final FleetType fleetType) {
+        if (fleetType == FleetType.NORMAL) {
+            this.radioButton.setSelected(true);
+        } else if (fleetType == FleetType.STRIKING_FORCE) {
+            this.radioButton_1.setSelected(true);
+        } else if (fleetType == FleetType.CARRIER_TASK_FORCE) {
+            this.radioButton_2.setSelected(true);
+        } else if (fleetType == FleetType.SURFACE_TASK_FORCE) {
+            this.radioButton_3.setSelected(true);
+        } else if (fleetType == FleetType.TRANSPORT_ESCORT) {
+            this.radioButton_4.setSelected(true);
         }
     }
 
@@ -337,6 +376,68 @@ public class EventPanel implements ActionListener {
         }
 
         eventBuilder.write(path);
-        Logger.getGlobal().info("save xml file : " + path.getFileName().toString());
+        Logger.getGlobal().info("save xml file : " + path.toAbsolutePath().toString());
+        JOptionPane.showMessageDialog(MainLoader.getFrame(), "情報を保存しました。\n -> " +
+                path.toAbsolutePath().toString());
+    }
+
+    private void loadXmlFile() {
+        JFileChooser fc = new JFileChooser(System.getProperty("user.dir"));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("xml file(*.xml)", "xml");
+        fc.setFileFilter(filter);
+        int selected = fc.showSaveDialog(this.panel);
+        if (selected != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        EventLoader eventLoader = new EventLoader(fc.getSelectedFile().getAbsolutePath());
+
+        MainLoader.changeTabName(eventLoader.getEventName());
+        EventPanel.textField_levelFilter.setText(eventLoader.getFilterLevel());
+        EventPanel.textField_tag.setText(eventLoader.getTag());
+        EventPanel.checkBox_fastOnly.setSelected(eventLoader.isFastOnly());
+
+        FleetType fleetType = eventLoader.getFleetType();
+        changeRadioButton(fleetType);
+
+        int maxKanmusu = 6;
+        if (fleetType == FleetType.NORMAL) {
+            loadNormalPanel();
+        } else if (fleetType == FleetType.STRIKING_FORCE) {
+            loadStrinkingPanel();
+            maxKanmusu = 7;
+        } else {
+            loadCombinedPanel();
+            maxKanmusu = 12;
+        }
+
+        for (int i = 1; i <= maxKanmusu; i++) {
+            Kanmusu kanmusu = eventLoader.getKanmusu(i);
+
+            if (fleetType == FleetType.NORMAL) { // 通常艦隊
+                this.normalFleetPanel1.setComboBoxTypeValue(i, kanmusu.shipTypeString());
+                this.normalFleetPanel1.setComboBoxNameValue(i, kanmusu.toString());
+                continue;
+            }
+            if (fleetType == FleetType.STRIKING_FORCE) { // 遊撃艦隊
+                this.strikingFleetPanel.setComboBoxTypeValue(i, kanmusu.shipTypeString());
+                this.strikingFleetPanel.setComboBoxNameValue(i, kanmusu.toString());
+                continue;
+            }
+            if (i <= 6) { // 連合第一
+                this.normalFleetPanel1.setComboBoxTypeValue(i, kanmusu.shipTypeString());
+                this.normalFleetPanel1.setComboBoxNameValue(i, kanmusu.toString());
+                continue;
+            }
+            // 連合第二
+            this.normalFleetPanel2.setComboBoxTypeValue(i, kanmusu.shipTypeString());
+            this.normalFleetPanel2.setComboBoxNameValue(i, kanmusu.toString());
+        }
+
+        setKanmusuTag();
+
+        Logger.getGlobal().info("load xml file : " + fc.getSelectedFile().getAbsolutePath());
+        JOptionPane.showMessageDialog(MainLoader.getFrame(), "ファイルから情報を読み込みました。\n -> " +
+                fc.getSelectedFile().getAbsolutePath());
     }
 }

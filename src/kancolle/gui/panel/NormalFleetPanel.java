@@ -233,4 +233,42 @@ public class NormalFleetPanel extends FleetPanel {
             comboBoxTypeAction((JComboBox<?>) object);
         }
     }
+
+    @Override
+    public void setComboBoxTypeValue(final int no, final String value) {
+        int realNo = no > 6 ? no - 6 : no;
+
+        if (realNo == 1) {
+            this.comboBox_Type_1.setSelectedItem(value);
+        } else if (realNo == 2) {
+            this.comboBox_Type_2.setSelectedItem(value);
+        } else if (realNo == 3) {
+            this.comboBox_Type_3.setSelectedItem(value);
+        } else if (realNo == 4) {
+            this.comboBox_Type_4.setSelectedItem(value);
+        } else if (realNo == 5) {
+            this.comboBox_Type_5.setSelectedItem(value);
+        } else if (realNo == 6) {
+            this.comboBox_Type_6.setSelectedItem(value);
+        }
+    }
+
+    @Override
+    public void setComboBoxNameValue(final int no, final String value) {
+        int realNo = no > 6 ? no - 6 : no;
+
+        if (realNo == 1) {
+            this.comboBox_Name_1.setSelectedItem(value);
+        } else if (realNo == 2) {
+            this.comboBox_Name_2.setSelectedItem(value);
+        } else if (realNo == 3) {
+            this.comboBox_Name_3.setSelectedItem(value);
+        } else if (realNo == 4) {
+            this.comboBox_Name_4.setSelectedItem(value);
+        } else if (realNo == 5) {
+            this.comboBox_Name_5.setSelectedItem(value);
+        } else if (realNo == 6) {
+            this.comboBox_Name_6.setSelectedItem(value);
+        }
+    }
 }
