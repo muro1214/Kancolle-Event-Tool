@@ -60,35 +60,63 @@ public class EventBuilder {
     }
 
     public Element setEventAreaInfo(final int no, final String areaName, final String tagName,
-            final FleetType fleetType, final boolean isFastOnly) {
+            final boolean isFastOnly) {
         Element eventArea = this.document.createElement("event");
-        eventArea.setAttribute("no", String.valueOf(no));
-        eventArea.setAttribute("area", areaName);
-        eventArea.setAttribute("tag", tagName);
-        eventArea.setAttribute("fleet-type", fleetType.typeName());
-        eventArea.setAttribute("fast-only", isFastOnly ? "yes" : "no");
+        eventArea.setAttribute("name", areaName);
+
+        Element number = this.document.createElement("no");
+        number.appendChild(this.document.createTextNode(String.valueOf(no)));
+        eventArea.appendChild(number);
+
+        Element fastOnly = this.document.createElement("fast-only");
+        fastOnly.appendChild(this.document.createTextNode(isFastOnly ? "yes" : "no"));
+        eventArea.appendChild(fastOnly);
+
+        Element tag = this.document.createElement("tag");
+        tag.appendChild(this.document.createTextNode(tagName));
+        eventArea.appendChild(tag);
 
         this.document.appendChild(eventArea);
 
         return eventArea;
     }
 
+    public Element buildFleetElement(final FleetType fleetType){
+        Element fleet = this.document.createElement("fleet");
+        fleet.setAttribute("type", fleetType.typeName());
+
+        return fleet;
+    }
+
     public Element buildKanmusuElement(final int no, final Kanmusu kanmusu) {
         Element element = this.document.createElement("kanmusu");
+        element.setAttribute("name", kanmusu.name());
         element.setAttribute("no", String.valueOf(no));
-        element.setAttribute("id", String.valueOf(kanmusu.id()));
-        element.setAttribute("ship-type", kanmusu.shipTypeString());
-        element.setAttribute("level", String.valueOf(kanmusu.level()));
-        element.setAttribute("speed", kanmusu.speedString());
-        element.appendChild(this.document.createTextNode(kanmusu.name()));
+
+        Element id = this.document.createElement("id");
+        id.appendChild(this.document.createTextNode(String.valueOf(kanmusu.id())));
+        element.appendChild(id);
+
+        Element level = this.document.createElement("level");
+        level.appendChild(this.document.createTextNode(String.valueOf(kanmusu.level())));
+        element.appendChild(level);
+
+        Element type = this.document.createElement("type");
+        type.appendChild(this.document.createTextNode(kanmusu.shipTypeString()));
+        element.appendChild(type);
+
+        Element speed = this.document.createElement("speed");
+        speed.appendChild(this.document.createTextNode(kanmusu.speedString()));
+        element.appendChild(speed);
 
         return element;
     }
 
     public Element buildFilterElement(final String level) {
         Element element = this.document.createElement("filter");
-        element.setAttribute("name", "level");
-        element.appendChild(this.document.createTextNode(level));
+        Element element2 = this.document.createElement("level");
+        element2.appendChild(this.document.createTextNode(level));
+        element.appendChild(element2);
 
         return element;
     }

@@ -61,6 +61,7 @@ public class EventPanel implements ActionListener {
     private NormalFleetPanel normalFleetPanel1;
     private NormalFleetPanel normalFleetPanel2;
     private StrikingFleetPanel strikingFleetPanel;
+    private Object beforeObject;
 
     //memo  panel.remove();
 
@@ -81,6 +82,7 @@ public class EventPanel implements ActionListener {
         this.radioButton.setBounds(8, 13, 74, 21);
         this.radioButton.addActionListener(this);
         this.panel_2.add(this.radioButton);
+        this.beforeObject = this.radioButton;
 
         this.radioButton_1 = new JRadioButton(FleetType.STRIKING_FORCE.typeName());
         this.buttonGroup.add(this.radioButton_1);
@@ -164,7 +166,11 @@ public class EventPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object object = e.getSource();
 
-        if (object == this.radioButton && this.radioButton.isSelected()) {
+        if(Objects.equals(object, this.beforeObject)){
+            return;
+        }
+
+        if (object == this.radioButton) {
             removeFleetPanels();
 
             this.normalFleetPanel1 = new NormalFleetPanel();
@@ -177,7 +183,7 @@ public class EventPanel implements ActionListener {
 
             this.isBeforeCombinedFleet = false;
             Logger.getGlobal().info("艦隊情報を変更 -> 通常艦隊");
-        } else if (object == this.radioButton_1 && this.radioButton_1.isSelected()) {
+        } else if (object == this.radioButton_1) {
             removeFleetPanels();
 
             this.strikingFleetPanel = new StrikingFleetPanel();
@@ -190,9 +196,7 @@ public class EventPanel implements ActionListener {
 
             this.isBeforeCombinedFleet = false;
             Logger.getGlobal().info("艦隊情報を変更 -> 遊撃艦隊");
-        } else if ((object == this.radioButton_2 || object == this.radioButton_3 || object == this.radioButton_4) &&
-                (this.radioButton_2.isSelected() || this.radioButton_3.isSelected()
-                        || this.radioButton_4.isSelected())) {
+        } else if (object == this.radioButton_2 || object == this.radioButton_3 || object == this.radioButton_4) {
             if (this.isBeforeCombinedFleet) {
                 Logger.getGlobal().info("艦隊情報を変更 -> " + getCurrentFleetType().typeName());
                 return;
@@ -219,6 +223,8 @@ public class EventPanel implements ActionListener {
             setKanmusuTag();
             saveXmlFile();
         }
+
+        this.beforeObject = object;
     }
 
     private void removeFleetPanels() {
@@ -307,7 +313,10 @@ public class EventPanel implements ActionListener {
 
         String tabName = MainLoader.getCurrentTabName();
         Element eventArea = eventBuilder.setEventAreaInfo(MainLoader.getCurrentTabNo(), tabName, getTag(),
-                getCurrentFleetType(), checkBox_fastOnly.isSelected());
+                checkBox_fastOnly.isSelected());
+        eventArea.appendChild(eventBuilder.buildFilterElement(textField_levelFilter.getText()));
+
+        Element fleet = eventBuilder.buildFleetElement(getCurrentFleetType());
 
         List<String> kanmusus = getAllFleetKanmusus();
         for (int i = 0; i < kanmusus.size(); i++) {
@@ -315,10 +324,10 @@ public class EventPanel implements ActionListener {
                 continue;
             }
             Kanmusu kanmusu = Fleets.getKanmusuFromId(getKanmusuId(kanmusus.get(i)));
-            eventArea.appendChild(eventBuilder.buildKanmusuElement(i + 1, kanmusu));
+            fleet.appendChild(eventBuilder.buildKanmusuElement(i + 1, kanmusu));
         }
 
-        eventArea.appendChild(eventBuilder.buildFilterElement(textField_levelFilter.getText()));
+        eventArea.appendChild(fleet);
 
         Path path = Paths.get(String.format("xml\\%s.xml", tabName));
         try {
