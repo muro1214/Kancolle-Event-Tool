@@ -16,7 +16,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -37,10 +36,6 @@ public class MainLoader extends JFrame implements ActionListener {
     private JMenu mnFile;
     private JMenu mnHelp;
     private JMenuItem mntmAbout;
-    private JMenuItem mntmOpen;
-    private JMenuItem mntmSave;
-    private JMenuItem mntmSaveAs;
-    private JSeparator separator;
     private JMenuItem mntmExit;
     private JButton button_addTab;
     private JButton button_deleteTab;
@@ -85,28 +80,15 @@ public class MainLoader extends JFrame implements ActionListener {
         this.mnFile = new JMenu("File");
         this.menuBar.add(this.mnFile);
 
-        this.mntmOpen = new JMenuItem("Open");
-        this.mntmOpen.addActionListener(this);
-        this.mnFile.add(this.mntmOpen);
-
-        this.mntmSave = new JMenuItem("Save");
-        this.mntmSave.addActionListener(this);
-        this.mnFile.add(this.mntmSave);
-
-        this.mntmSaveAs = new JMenuItem("Save As");
-        this.mntmSaveAs.addActionListener(this);
-        this.mnFile.add(this.mntmSaveAs);
-
-        this.separator = new JSeparator();
-        this.mnFile.add(this.separator);
-
         this.mntmExit = new JMenuItem("Exit");
+        this.mntmExit.addActionListener(this);
         this.mnFile.add(this.mntmExit);
 
         this.mnHelp = new JMenu("Help");
         this.menuBar.add(this.mnHelp);
 
         this.mntmAbout = new JMenuItem("About");
+        this.mntmAbout.addActionListener(this);
         this.mnHelp.add(this.mntmAbout);
 
         this.contentPane = new JPanel();
@@ -200,6 +182,15 @@ public class MainLoader extends JFrame implements ActionListener {
             changeTabName(tabName);
 
             Logger.getGlobal().info("Change tabName : " + old + " -> " + tabName);
+        } else if (object == this.mntmExit) {
+            int option = JOptionPane.showConfirmDialog(MainLoader.frame, "ツールを終了してもよろしいですか？",
+                    "確認", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+        } else if (object == this.mntmAbout) {
+            JOptionPane.showMessageDialog(MainLoader.frame, "バージョン：0.0.1", "バージョン情報",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -211,7 +202,7 @@ public class MainLoader extends JFrame implements ActionListener {
         return MainLoader.currentTabNo;
     }
 
-    public static MainLoader getFrame(){
+    public static MainLoader getFrame() {
         return MainLoader.frame;
     }
 
