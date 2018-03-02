@@ -148,6 +148,12 @@ public class MainLoader extends JFrame implements ActionListener {
         Object object = e.getSource();
 
         if (object == this.button_addTab) {
+            if(!SettingPanel.isCsvOpened()){
+                JOptionPane.showMessageDialog(this, "先に設定タブからcsvファイルを開いてください", "メッセージ",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             String tabName = JOptionPane.showInputDialog(this, "タブ名を入力してください");
             if (Objects.isNull(tabName)) {
                 return;
@@ -161,7 +167,8 @@ public class MainLoader extends JFrame implements ActionListener {
             Logger.getGlobal().info("Add tab : " + tabName);
         } else if (object == this.button_deleteTab) {
             if (this.tabbedPane.getSelectedIndex() == 0) {
-                JOptionPane.showMessageDialog(this, "このタブは削除できません");
+                JOptionPane.showMessageDialog(this, "このタブは削除できません", "メッセージ",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -177,7 +184,8 @@ public class MainLoader extends JFrame implements ActionListener {
             Logger.getGlobal().info("Delete tab : " + tabName);
         } else if (object == this.button_renameTab) {
             if (this.tabbedPane.getSelectedIndex() == 0) {
-                JOptionPane.showMessageDialog(this, "このタブは名前を変更できません");
+                JOptionPane.showMessageDialog(this, "このタブは名前を変更できません", "メッセージ",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
