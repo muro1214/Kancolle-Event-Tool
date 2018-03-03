@@ -27,7 +27,6 @@ import javax.swing.event.ChangeListener;
 import kancolle.gui.panel.EventPanel;
 import kancolle.gui.panel.SettingPanel;
 
-@SuppressWarnings("serial")
 public class MainLoader extends JFrame implements ActionListener {
 
     private JPanel contentPane;
