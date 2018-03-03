@@ -46,6 +46,8 @@ public class MainLoader extends JFrame implements ActionListener {
     static int currentTabNo;
     static MainLoader frame;
 
+    private final String VERSION = "0.0.2";
+
     public static void main(String[] args) {
         initializeLogger();
 
@@ -190,12 +192,13 @@ public class MainLoader extends JFrame implements ActionListener {
                 System.exit(0);
             }
         } else if (object == this.mntmAbout) {
-            JOptionPane.showMessageDialog(MainLoader.frame, "バージョン：0.0.1", "バージョン情報",
+            JOptionPane.showMessageDialog(MainLoader.frame, "バージョン：" + VERSION, "バージョン情報",
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     public static String getCurrentTabName() {
+    	MainLoader.currentTabName = tabbedPane.getTitleAt(MainLoader.currentTabNo);
         return MainLoader.currentTabName;
     }
 
