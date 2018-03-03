@@ -73,7 +73,6 @@ public class Fleets {
 
     public static List<String> filterKanmusuList(final ShipType shipType, final boolean isFastOnly,
             final int levelFilter, final String tag) {
-
         Stream<Kanmusu> stream = Fleets.getKanmusuList().stream()
                 .filter(kanmusu -> kanmusu.shipType() == shipType)
                 .filter(kanmusu -> kanmusu.level() >= levelFilter)

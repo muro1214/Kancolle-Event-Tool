@@ -385,7 +385,7 @@ public class EventPanel implements ActionListener {
         JFileChooser fc = new JFileChooser(System.getProperty("user.dir"));
         FileNameExtensionFilter filter = new FileNameExtensionFilter("xml file(*.xml)", "xml");
         fc.setFileFilter(filter);
-        int selected = fc.showSaveDialog(this.panel);
+        int selected = fc.showOpenDialog(this.panel);
         if (selected != JFileChooser.APPROVE_OPTION) {
             return;
         }

@@ -21,11 +21,12 @@ public class EventLoader {
     final Element root;
 
     public EventLoader(final String uri) {
+    	System.out.println(uri);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         Document document = null;
         try {
             DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-            document = documentBuilder.parse(uri);
+            document = documentBuilder.parse("file:///" + uri);
         } catch (ParserConfigurationException | SAXException | IOException e) {
             Logger.getGlobal().severe(e.toString());
         }

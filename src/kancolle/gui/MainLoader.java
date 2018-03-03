@@ -3,6 +3,8 @@ package kancolle.gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -210,16 +212,12 @@ public class MainLoader extends JFrame implements ActionListener {
     }
 
     private static void initializeLogger() {
-        if (Objects.isNull(System.getProperty("java.util.logging.config.file")) &&
-                Objects.isNull(System.getProperty("java.util.logging.config.class"))) {
-            try (InputStream is = MainLoader.class.getResourceAsStream("../logging.properties")) {
-                if (!Objects.isNull(is)) {
-                    LogManager.getLogManager().readConfiguration(is);
-                }
-            } catch (IOException e) {
-                // use default logging config.
-                Logger.getGlobal().info(e.toString());
+    	try (InputStream is = new FileInputStream(new File(System.getProperty("user.dir") + "\\logging.properties"))) {
+            if (!Objects.isNull(is)) {
+                LogManager.getLogManager().readConfiguration(is);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

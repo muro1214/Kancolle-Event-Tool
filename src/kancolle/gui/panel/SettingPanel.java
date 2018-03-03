@@ -139,7 +139,7 @@ public class SettingPanel implements ActionListener {
         JFileChooser fc = new JFileChooser(System.getProperty("user.dir"));
         FileNameExtensionFilter filter = new FileNameExtensionFilter("csv file(*.csv)", "csv");
         fc.setFileFilter(filter);
-        int selected = fc.showSaveDialog(this.panel);
+        int selected = fc.showOpenDialog(this.panel);
         if (selected == JFileChooser.APPROVE_OPTION) {
             Fleets.loadMyKanmusuCSVData(fc.getSelectedFile().getAbsolutePath());
             this.textField_csvPath.setText(fc.getSelectedFile().getAbsolutePath());
