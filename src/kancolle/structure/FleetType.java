@@ -1,4 +1,4 @@
-package kancolle.fleet;
+package kancolle.structure;
 
 public enum FleetType {
     NORMAL("通常艦隊"),
