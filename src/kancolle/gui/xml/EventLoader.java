@@ -13,8 +13,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import kancolle.fleet.FleetType;
 import kancolle.fleet.Fleets;
+import kancolle.structure.FleetType;
 import kancolle.structure.Kanmusu;
 
 public class EventLoader {

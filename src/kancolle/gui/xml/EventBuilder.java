@@ -17,7 +17,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import kancolle.fleet.FleetType;
+import kancolle.structure.FleetType;
 import kancolle.structure.Kanmusu;
 
 public class EventBuilder {

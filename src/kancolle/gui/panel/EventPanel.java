@@ -30,11 +30,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.w3c.dom.Element;
 
-import kancolle.fleet.FleetType;
 import kancolle.fleet.Fleets;
 import kancolle.gui.MainLoader;
 import kancolle.gui.xml.EventBuilder;
 import kancolle.gui.xml.EventLoader;
+import kancolle.structure.FleetType;
 import kancolle.structure.Kanmusu;
 import kancolle.structure.ShipType;
 
