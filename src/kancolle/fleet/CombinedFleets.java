@@ -57,6 +57,9 @@ public class CombinedFleets {
         } else if (fleetType == FleetType.SURFACE_TASK_FORCE) {
             flag = surfaceTaskForce2(typeMap);
         } else if (fleetType == FleetType.TRANSPORT_ESCORT) {
+            if(!type21.equals(ShipType.LIGHT_CRUISER.typeName()) && !type21.equals(ShipType.TRAINING_CRUISER.typeName())){
+                return false;
+            }
             flag = transportEscort2(typeMap);
         }
 
@@ -70,22 +73,27 @@ public class CombinedFleets {
     }
 
     private static boolean carrierTaskForce1(final Map<String, Long> typeMap) {
-        long carriers = typeMap.getOrDefault(ShipType.AIRCRAFT_CARRIER.typeName(), 0L)
-                + typeMap.getOrDefault(ShipType.LIGHT_AIRCRAFT_CARRIER.typeName(), 0L)
-                + typeMap.getOrDefault(ShipType.ARMORED_AIRCRAFT_CARRIER.typeName(), 0L);
+        long carriers = removeOrDefault(typeMap, ShipType.AIRCRAFT_CARRIER.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.LIGHT_AIRCRAFT_CARRIER.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.ARMORED_AIRCRAFT_CARRIER.typeName(), 0L);
         if(carriers < 2L || carriers > 4L){
             return false;
         }
 
-        long battleShips = typeMap.getOrDefault(ShipType.BATTLESIHIP.typeName(), 0L)
-                + typeMap.getOrDefault(ShipType.AVIATION_BATTLESHIP, 0L);
+        long battleShips = removeOrDefault(typeMap, ShipType.BATTLESIHIP.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.AVIATION_BATTLESHIP.typeName(), 0L);
         if(battleShips > 2L){
             return false;
         }
 
-        long submarines = typeMap.getOrDefault(ShipType.SUBMARINE.typeName(), 0L)
-                + typeMap.getOrDefault(ShipType.SUBMARINE_TENDER.typeName(), 0L);
+        long submarines = removeOrDefault(typeMap, ShipType.SUBMARINE.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.SUBMARINE_TENDER.typeName(), 0L);
         if(submarines > 4L){
+            return false;
+        }
+
+        long others = typeMap.values().stream().mapToLong(x -> x).sum();
+        if(others > 4L){
             return false;
         }
 
@@ -124,6 +132,7 @@ public class CombinedFleets {
             return false;
         }
 
+        // 高速、低速の分類ができないのですべてOKとする。高速+があるのでしゃーない
         long battleShips = removeOrDefault(typeMap, ShipType.BATTLESIHIP.typeName(), 0L)
                 + removeOrDefault(typeMap, ShipType.AVIATION_BATTLESHIP.typeName(), 0L);
         if(battleShips > 2L){
@@ -141,38 +150,110 @@ public class CombinedFleets {
             return false;
         }
 
-        return false;
+        return true;
     }
 
     private static boolean surfaceTaskForce1(final Map<String, Long> typeMap) {
 
 
-        return false;
+        return true;
     }
 
     private static boolean surfaceTaskForce2(final Map<String, Long> typeMap) {
 
 
-        return false;
+        return true;
     }
 
     private static boolean transportEscort1(final Map<String, Long> typeMap) {
+        long destroyers = removeOrDefault(typeMap, ShipType.DESTROYER.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.DESTROYER_ESCORT.typeName(), 0L);
+        if(destroyers < 4L || destroyers > 6L){
+            return false;
+        }
 
+        long lightCruisers = removeOrDefault(typeMap, ShipType.LIGHT_CRUISER.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.TRAINING_CRUISER.typeName(), 0L);
+        if(lightCruisers > 2L){
+            return false;
+        }
 
-        return false;
+        long aircraftCruisers = removeOrDefault(typeMap, ShipType.AIRCRAFT_CRUISER.typeName(), 0L);
+        if(aircraftCruisers > 2L){
+            return false;
+        }
+
+        long aviations = removeOrDefault(typeMap, ShipType.AVIATION_BATTLESHIP.typeName(), 0L);
+        if(aviations > 2L){
+            return false;
+        }
+
+        long seaplane = removeOrDefault(typeMap, ShipType.SEAPLANE_CARRIER.typeName(), 0L);
+        if(seaplane > 2L){
+            return false;
+        }
+
+        long amphibious = removeOrDefault(typeMap, ShipType.AMPHIBIOUS_ASSAULT_SHIP.typeName(), 0L);
+        if(amphibious > 1L){
+            return false;
+        }
+
+        // 護衛空母だけだが・・・enumがないので軽空母を許容
+        long lightCarrier = removeOrDefault(typeMap, ShipType.LIGHT_AIRCRAFT_CARRIER.typeName(), 0L);
+        if(lightCarrier > 1L){
+            return false;
+        }
+
+        long submarineTender = removeOrDefault(typeMap, ShipType.SUBMARINE_TENDER.typeName(), 0L);
+        if(submarineTender > 1L){
+            return false;
+        }
+
+        long oilers = removeOrDefault(typeMap, ShipType.FLEET_OILER.typeName(), 0L);
+        if(oilers > 2L){
+            return false;
+        }
+
+        long others = typeMap.values().stream().mapToLong(x -> x).sum();
+        if(others != 0L){
+            return false;
+        }
+
+        return true;
     }
 
     private static boolean transportEscort2(final Map<String, Long> typeMap) {
+        long lightCruisers = removeOrDefault(typeMap, ShipType.LIGHT_CRUISER.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.TRAINING_CRUISER.typeName(), 0L);
+        if(lightCruisers < 1L || lightCruisers > 2L){
+            return false;
+        }
 
+        long destroyers = removeOrDefault(typeMap, ShipType.DESTROYER.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.DESTROYER_ESCORT.typeName(), 0L);
+        if(destroyers < 3L || destroyers > 5L){
+            return false;
+        }
 
-        return false;
+        long heavyCruirsers = removeOrDefault(typeMap, ShipType.HEAVY_CRUISER.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.AIRCRAFT_CRUISER.typeName(), 0L);
+        if(heavyCruirsers > 2L){
+            return false;
+        }
+
+        long others = typeMap.values().stream().mapToLong(x -> x).sum();
+        if(others != 0L){
+            return false;
+        }
+
+        return true;
     }
 
-    private static Map<String, Long> groupingBy(List<String> types){
+    private static Map<String, Long> groupingBy(final List<String> types){
         return types.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
     }
 
-    private static <K, V> V removeOrDefault(Map<K, V> map, K key, V defaultValue){
+    private static <K, V> V removeOrDefault(final Map<K, V> map, final K key, final V defaultValue){
         V value = map.remove(key);
 
         return Objects.isNull(value) ? defaultValue : value;
