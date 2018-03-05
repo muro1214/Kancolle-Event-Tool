@@ -80,7 +80,7 @@ public class CombinedFleets {
             return false;
         }
 
-        long battleShips = removeOrDefault(typeMap, ShipType.BATTLESIHIP.typeName(), 0L)
+        long battleShips = removeOrDefault(typeMap, ShipType.BATTLESHIP.typeName(), 0L)
                 + removeOrDefault(typeMap, ShipType.AVIATION_BATTLESHIP.typeName(), 0L);
         if(battleShips > 2L){
             return false;
@@ -133,7 +133,7 @@ public class CombinedFleets {
         }
 
         // 高速、低速の分類ができないのですべてOKとする。高速+があるのでしゃーない
-        long battleShips = removeOrDefault(typeMap, ShipType.BATTLESIHIP.typeName(), 0L)
+        long battleShips = removeOrDefault(typeMap, ShipType.BATTLESHIP.typeName(), 0L)
                 + removeOrDefault(typeMap, ShipType.AVIATION_BATTLESHIP.typeName(), 0L);
         if(battleShips > 2L){
             return false;
@@ -154,13 +154,101 @@ public class CombinedFleets {
     }
 
     private static boolean surfaceTaskForce1(final Map<String, Long> typeMap) {
+        long lightCruisers = removeOrDefault(typeMap, ShipType.LIGHT_CRUISER.typeName(), 0L);
+        long torpedoCruisers = removeOrDefault(typeMap, ShipType.TORPEDO_CRUISER.typeName(), 0L);
+        long heavyCruisers = removeOrDefault(typeMap, ShipType.HEAVY_CRUISER.typeName(), 0L);
+        long aircraftCruisers = removeOrDefault(typeMap, ShipType.AIRCRAFT_CRUISER.typeName(), 0L);
+        long battleShips = removeOrDefault(typeMap, ShipType.BATTLESHIP.typeName(), 0L);
+        long aviations = removeOrDefault(typeMap, ShipType.AVIATION_BATTLESHIP.typeName(), 0L);
+        long total = lightCruisers + torpedoCruisers + heavyCruisers + aircraftCruisers + battleShips + aviations;
+        if(total < 2L){
+            return false;
+        }
+        if(lightCruisers + torpedoCruisers > 6L){
+            return false;
+        }
+        if(heavyCruisers + aircraftCruisers > 4L){
+            return false;
+        }
+        if(battleShips + aviations > 4L){
+            return false;
+        }
 
+        long carriers = removeOrDefault(typeMap, ShipType.AIRCRAFT_CARRIER.typeName(), 0L);
+        long lightCarriers = removeOrDefault(typeMap, ShipType.LIGHT_AIRCRAFT_CARRIER.typeName(), 0L);
+        if(carriers > 1L){
+            return false;
+        }
+        if(lightCarriers > 2L){
+            return false;
+        }
+        if(carriers != 0 && lightCarriers != 0){
+            return false;
+        }
+
+        long submarines = removeOrDefault(typeMap, ShipType.SUBMARINE.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.SUBMARINE_TENDER.typeName(), 0L);
+        if(submarines > 4L){
+            return false;
+        }
+
+        long others = typeMap.values().stream().mapToLong(x -> x).sum();
+        if(others > 4L){
+            return false;
+        }
 
         return true;
     }
 
     private static boolean surfaceTaskForce2(final Map<String, Long> typeMap) {
+        long lightCruiser = removeOrDefault(typeMap, ShipType.LIGHT_CRUISER.typeName(), 0L);
+        if(lightCruiser != 1){
+            return false;
+        }
 
+        long destroyers = removeOrDefault(typeMap, ShipType.DESTROYER.typeName(), 0L);
+        if(destroyers < 2L || destroyers > 5L){
+            return false;
+        }
+
+        long heavyCruisers = removeOrDefault(typeMap, ShipType.HEAVY_CRUISER.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.AIRCRAFT_CRUISER.typeName(), 0L);
+        if(heavyCruisers > 2L){
+            return false;
+        }
+
+        long seaplane = removeOrDefault(typeMap, ShipType.SEAPLANE_CARRIER.typeName(), 0L);
+        if(seaplane > 1L){
+            return false;
+        }
+
+        long lightCarrier = removeOrDefault(typeMap, ShipType.LIGHT_AIRCRAFT_CARRIER.typeName(), 0L);
+        if(lightCarrier > 1L){
+            return false;
+        }
+
+        long carrier = removeOrDefault(typeMap, ShipType.AIRCRAFT_CARRIER.typeName(), 0L);
+        if(carrier != 0L){
+            return false;
+        }
+
+        // 高速、低速の分類ができないのですべてOKとする。高速+があるのでしゃーない
+        long battleShips = removeOrDefault(typeMap, ShipType.BATTLESHIP.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.AVIATION_BATTLESHIP.typeName(), 0L);
+        if(battleShips > 2L){
+            return false;
+        }
+
+        long submarines = removeOrDefault(typeMap, ShipType.SUBMARINE.typeName(), 0L)
+                + removeOrDefault(typeMap, ShipType.SUBMARINE_TENDER.typeName(), 0L);
+        if(submarines > 3L){
+            return false;
+        }
+
+        long others = typeMap.values().stream().mapToLong(x -> x).sum();
+        if(others > 3L){
+            return false;
+        }
 
         return true;
     }
