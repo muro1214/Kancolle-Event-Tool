@@ -1,5 +1,11 @@
 package kancolle.fleet;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import kancolle.structure.FleetType;
 import kancolle.structure.ShipType;
 
 public class CombinedFleets {
@@ -62,37 +68,66 @@ public class CombinedFleets {
 
     private static boolean carrierTaskForce1(final String type11, final String type12,
             final String type13, final String type14, final String type15, final String type16) {
+        Map<String, Long> typeMap = groupingBy(Arrays.asList(type11, type12, type13, type14, type15, type16));
 
-        return false;
+        long carriers = typeMap.getOrDefault(ShipType.AIRCRAFT_CARRIER.typeName(), 0L)
+                + typeMap.getOrDefault(ShipType.LIGHT_AIRCRAFT_CARRIER.typeName(), 0L)
+                + typeMap.getOrDefault(ShipType.ARMORED_AIRCRAFT_CARRIER.typeName(), 0L);
+        if(carriers < 2L || carriers > 4L){
+            return false;
+        }
+
+        long battleShips = typeMap.getOrDefault(ShipType.BATTLESIHIP.typeName(), 0L)
+                + typeMap.getOrDefault(ShipType.AVIATION_BATTLESHIP, 0L);
+        if(battleShips > 2L){
+            return false;
+        }
+
+        long submarines = typeMap.getOrDefault(ShipType.SUBMARINE.typeName(), 0L)
+                + typeMap.getOrDefault(ShipType.SUBMARINE_TENDER.typeName(), 0L);
+        if(submarines > 4L){
+            return false;
+        }
+
+        return true;
     }
 
     private static boolean carrierTaskForce2(final String type21, final String type22,
             final String type23, final String type24, final String type25, final String type26) {
+        List<String> tmp = Arrays.asList(type21, type22, type23, type24, type25, type26);
 
         return false;
     }
 
     private static boolean surfaceTaskForce1(final String type11, final String type12,
             final String type13, final String type14, final String type15, final String type16) {
+        List<String> tmp = Arrays.asList(type11, type12, type13, type14, type15, type16);
 
         return false;
     }
 
     private static boolean surfaceTaskForce2(final String type21, final String type22,
             final String type23, final String type24, final String type25, final String type26) {
+        List<String> tmp = Arrays.asList(type21, type22, type23, type24, type25, type26);
 
         return false;
     }
 
     private static boolean transportEscort1(final String type11, final String type12,
             final String type13, final String type14, final String type15, final String type16) {
+        List<String> tmp = Arrays.asList(type11, type12, type13, type14, type15, type16);
 
         return false;
     }
 
     private static boolean transportEscort2(final String type21, final String type22,
             final String type23, final String type24, final String type25, final String type26) {
+        List<String> tmp = Arrays.asList(type21, type22, type23, type24, type25, type26);
 
         return false;
+    }
+
+    private static Map<String, Long> groupingBy(List<String> types){
+        return types.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
     }
 }
