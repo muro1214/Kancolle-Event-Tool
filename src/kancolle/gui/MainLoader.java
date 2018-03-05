@@ -31,6 +31,7 @@ import kancolle.gui.panel.SettingPanel;
 
 public class MainLoader extends JFrame implements ActionListener {
 
+    private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     static JTabbedPane tabbedPane;
     private JMenuBar menuBar;
@@ -192,7 +193,7 @@ public class MainLoader extends JFrame implements ActionListener {
                 System.exit(0);
             }
         } else if (object == this.mntmAbout) {
-            JOptionPane.showMessageDialog(MainLoader.frame, "バージョン：" + VERSION, "バージョン情報",
+            JOptionPane.showMessageDialog(MainLoader.frame, "バージョン：" + this.VERSION, "バージョン情報",
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
