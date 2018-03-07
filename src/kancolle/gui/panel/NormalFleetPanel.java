@@ -224,6 +224,15 @@ public class NormalFleetPanel extends FleetPanel {
                 this.comboBox_Name_6.getSelectedItem().toString());
     }
 
+    public List<String> getKanmusuTypes(){
+        return Arrays.asList(this.comboBox_Type_1.getSelectedItem().toString(),
+                this.comboBox_Type_2.getSelectedItem().toString(),
+                this.comboBox_Type_3.getSelectedItem().toString(),
+                this.comboBox_Type_4.getSelectedItem().toString(),
+                this.comboBox_Type_5.getSelectedItem().toString(),
+                this.comboBox_Type_6.getSelectedItem().toString());
+    }
+
     @Override
     public void actionPerformed(final ActionEvent e) {
         Object object = e.getSource();

@@ -30,6 +30,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.w3c.dom.Element;
 
+import kancolle.fleet.CombinedFleets;
 import kancolle.fleet.Fleets;
 import kancolle.gui.MainLoader;
 import kancolle.gui.xml.EventBuilder;
@@ -193,6 +194,16 @@ public class EventPanel implements ActionListener {
 
             loadCombinedPanel();
         } else if (object == this.button) {
+            if(this.radioButton_2.isSelected() || this.radioButton_3.isSelected() || this.radioButton_4.isSelected()){
+                if(!CombinedFleets.isConditionOK1(getCurrentFleetType(), this.normalFleetPanel1.getKanmusuTypes()) ||
+                        !CombinedFleets.isConditionOK2(getCurrentFleetType(), this.normalFleetPanel2.getKanmusuTypes())){
+                    Logger.getGlobal().warning("連合艦隊の構築に失敗");
+                    JOptionPane.showMessageDialog(MainLoader.getFrame(), "現在の艦種では連合艦隊を組めません",
+                            "艦種エラー", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
             setKanmusuTag();
             saveXmlFile();
         } else if (object == this.button_2) {
